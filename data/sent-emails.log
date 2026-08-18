@@ -1,0 +1,36 @@
+
+[2026-08-17T23:53:46.297Z] MOCK EMAIL (no SMTP_HOST set in .env — not actually sent)
+To: x@x.com
+Subject: You're Booked — We'll Be In Touch Soon
+Hi there,
+
+Thanks for booking with Trust! We've received your move details below, and a move consultant will reach out shortly with your quote and next steps.
+
+Route: A → B
+Move date: Flexible
+Home size: —
+Service type: Full Service
+Special items: None
+
+No action needed from you right now — we'll be in touch soon to confirm pricing and finalize the details of your move.
+
+— The Trust Team
+────────────────────────────────────────────────────────────
+
+[2026-08-18T00:38:19.267Z] MOCK EMAIL (no SMTP_HOST set in .env — not actually sent)
+To: x@x.com
+Subject: You're Booked — We'll Be In Touch Soon
+Hi there,
+
+Thanks for booking with Trust! We've received your move details below, and a move consultant will reach out shortly with your quote and next steps.
+
+Route: A → B
+Move date: Flexible
+Home size: —
+Service type: Full Service
+Special items: None
+
+No action needed from you right now — we'll be in touch soon to confirm pricing and finalize the details of your move.
+
+— The Trust Team
+────────────────────────────────────────────────────────────

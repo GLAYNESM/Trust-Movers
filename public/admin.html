@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Trust</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.577.0"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #C1121F;
+    --red-dark: #96030F;
+    --red-light: #E63946;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --card: #1A1A1A;
+    --card2: #1F1F1F;
+    --border: #2A2A2A;
+    --text: #FFFFFF;
+    --muted: #888888;
+    --subtle: #555555;
+  }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--black);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .icon { width: 18px; height: 18px; stroke-width: 2; flex-shrink: 0; }
+
+  a { color: inherit; }
+
+  /* ── LOGIN GATE ── */
+  #loginGate {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .login-box {
+    width: 100%; max-width: 380px;
+    background: var(--dark); border: 1px solid var(--border);
+    padding: 40px;
+  }
+  .login-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+  .login-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px; font-weight: 800; text-transform: uppercase;
+  }
+  .login-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .form-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    color: var(--muted); text-transform: uppercase;
+  }
+  .form-input, .form-select, .form-textarea {
+    background: #111; border: 1px solid var(--border);
+    color: var(--text); padding: 12px 14px;
+    font-family: 'Barlow', sans-serif; font-size: 14px;
+    outline: none; transition: border-color 0.2s; width: 100%;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--red); }
+  .form-textarea { resize: vertical; min-height: 100px; font-family: 'Barlow', sans-serif; }
+  .form-checkbox-row { display: flex; align-items: center; gap: 10px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--red); color: white; border: none;
+    padding: 12px 20px; font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; cursor: pointer; transition: background 0.2s;
+  }
+  .btn:hover { background: var(--red-light); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-outline {
+    background: transparent; border: 1px solid var(--border); color: var(--text);
+  }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); background: transparent; }
+  .btn-full { width: 100%; }
+  .btn-sm { padding: 8px 14px; font-size: 11px; }
+  .btn-danger { background: transparent; border: 1px solid var(--border); color: var(--red-light); }
+  .btn-danger:hover { background: rgba(193,18,31,0.1); border-color: var(--red); }
+
+  .msg { font-size: 12px; padding: 10px 12px; margin-bottom: 16px; display: none; line-height: 1.5; }
+  .msg.error { display: block; background: rgba(193,18,31,0.12); color: var(--red-light); border: 1px solid rgba(193,18,31,0.3); }
+  .msg.success { display: block; background: rgba(34,197,94,0.1); color: #22C55E; border: 1px solid rgba(34,197,94,0.3); }
+
+  /* ── APP SHELL ── */
+  #app { display: none; }
+  #app.active { display: block; }
+
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px; height: 64px;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(10px);
+    z-index: 10;
+  }
+  .topbar-logo { display: flex; align-items: center; gap: 10px; font-family:'Barlow Condensed',sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; }
+  .topbar-logo span { color: var(--red); }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .topbar-user { font-size: 13px; color: var(--muted); }
+  .topbar-user strong { color: var(--text); }
+
+  .shell {
+    max-width: 1100px; margin: 0 auto; padding: 32px 28px 80px;
+  }
+
+  .tabs {
+    display: flex; gap: 2px; margin-bottom: 28px; border: 1px solid var(--border);
+    width: fit-content; max-width: 100%; overflow-x: auto;
+  }
+  .tab-btn { flex-shrink: 0; }
+  .tab-btn {
+    background: var(--card); border: none; color: var(--muted);
+    padding: 12px 24px; font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .tab-btn.active { background: var(--red); color: #fff; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px; gap: 16px; flex-wrap: wrap;
+  }
+  .panel-title { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 800; text-transform: uppercase; }
+  .panel-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  .card { background: var(--card); border: 1px solid var(--border); }
+
+  .geo-panel {
+    background: linear-gradient(135deg, rgba(193,18,31,0.06), rgba(193,18,31,0.01));
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .geo-panel-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 16px; }
+  .geo-status-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--subtle); flex-shrink: 0; margin-top: 5px;
+    transition: background 0.3s;
+  }
+  .geo-status-dot.active {
+    background: #22C55E;
+    box-shadow: 0 0 0 0 rgba(34,197,94,0.6);
+    animation: geoPulse 1.6s ease-out infinite;
+  }
+  @keyframes geoPulse {
+    0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+    70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+  }
+  .geo-panel-title { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+  .geo-panel-sub { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+  .geo-toggle-btn { width: 100%; justify-content: center; }
+  .geo-readout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
+  }
+  .geo-readout-item { display: flex; flex-direction: column; gap: 4px; }
+  .geo-readout-label { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--subtle); }
+  .geo-readout-value { font-size: 13px; font-weight: 600; font-family: 'Barlow Condensed', sans-serif; }
+  .geo-readout-value.accuracy-good { color: #22C55E; }
+  .geo-readout-value.accuracy-fair { color: #EAB308; }
+  .geo-readout-value.accuracy-poor { color: var(--red-light); }
+
+  .article-row, .quote-row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-bottom: 1px solid var(--border);
+  }
+  .article-row:last-child, .quote-row:last-child { border-bottom: none; }
+
+  .article-thumb {
+    width: 44px; height: 44px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .article-thumb svg { width: 22px; height: 22px; stroke: #fff; }
+
+  .article-info { flex: 1; min-width: 0; }
+  .article-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .article-meta { font-size: 11px; color: var(--muted); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+  .quote-contact { display: flex; gap: 16px; flex-wrap: wrap; margin: 4px 0 8px; }
+  .quote-contact-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; color: var(--text); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .quote-contact-link .icon { width: 13px; height: 13px; stroke: var(--red); flex-shrink: 0; }
+  .quote-contact-link:hover { color: var(--red-light); }
+  .quote-contact-empty { font-size: 12px; color: var(--subtle); font-style: italic; margin: 4px 0 8px; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 3px 8px;
+  }
+  .badge.published { background: rgba(34,197,94,0.12); color: #22C55E; }
+  .badge.draft { background: rgba(136,136,136,0.15); color: var(--muted); }
+  .badge.status-new { background: rgba(193,18,31,0.12); color: var(--red-light); }
+  .badge.status-contacted { background: rgba(234,179,8,0.12); color: #EAB308; }
+  .badge.status-booked, .badge.status-closed { background: rgba(34,197,94,0.12); color: #22C55E; }
+
+  .row-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .icon-btn {
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .icon-btn:hover { border-color: var(--red); color: var(--red); }
+  .icon-btn .icon { width: 15px; height: 15px; }
+
+  .empty-state {
+    padding: 60px 20px; text-align: center; color: var(--muted); font-size: 14px;
+  }
+
+  /* ── EDITOR MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
+    display: none; align-items: flex-start; justify-content: center;
+    padding: 40px 20px; overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--dark); border: 1px solid var(--border);
+    width: 100%; max-width: 560px; padding: 32px;
+  }
+  .modal-title { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; }
+  .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 8px; }
+  .modal-actions .btn { flex: 1; }
+
+  .icon-picker { display: flex; gap: 8px; flex-wrap: wrap; }
+  .icon-picker button {
+    width: 42px; height: 42px; background: #111; border: 1px solid var(--border);
+    cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--muted);
+    transition: all 0.2s;
+  }
+  .icon-picker button.active { border-color: var(--red); color: var(--red); background: rgba(193,18,31,0.1); }
+
+  .swatch-picker { display: flex; gap: 8px; flex-wrap: wrap; }
+  .swatch-picker button {
+    width: 42px; height: 42px; border: 2px solid transparent; cursor: pointer;
+  }
+  .swatch-picker button.active { border-color: var(--text); }
+
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--red);
+    padding: 14px 20px; font-size: 13px; max-width: 90vw;
+    z-index: 300; opacity: 0; pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.success { border-left-color: #22C55E; }
+
+  @media (max-width: 640px) {
+    .topbar { padding: 0 16px; }
+    .topbar-user { display: none; }
+    .shell { padding: 24px 16px 60px; }
+    .panel-header { flex-direction: column; align-items: flex-start; }
+    .form-row-2 { grid-template-columns: 1fr; }
+    .article-row, .quote-row { flex-wrap: wrap; }
+    .login-box { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN GATE -->
+<div id="loginGate">
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="/assets/logo-icon.png" alt="Trust Movers logo" style="height:30px;width:auto">
+      <span style="font-family:'Barlow Condensed',sans-serif;line-height:1">
+        <span style="display:block;font-weight:800;font-size:18px;letter-spacing:1px;text-transform:uppercase">Trust</span>
+        <span style="display:block;font-weight:700;font-size:8px;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-top:2px">Movers</span>
+      </span>
+    </div>
+    <h1 class="login-title">Admin Login</h1>
+    <p class="login-sub">Sign in with your admin account to manage resource articles and quote leads.</p>
+    <p class="msg" id="loginMsg"></p>
+    <form id="loginForm" onsubmit="return handleAdminLogin(event)">
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" id="loginEmail" required placeholder="packers@trustmoversug.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" id="loginPassword" required placeholder="••••••••">
+      </div>
+      <button class="btn btn-full" type="submit" id="loginBtn">Log In</button>
+      <button type="button" onclick="showAdminForgot()" style="background:none;border:none;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer;margin-top:12px;display:block">Forgot password?</button>
+    </form>
+
+    <form id="adminForgotForm" style="display:none" onsubmit="return handleAdminForgot(event)">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Enter your admin email and we'll send a reset link.</p>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" id="forgotEmail" required placeholder="packers@trustmoversug.com">
+      </div>
+      <button class="btn btn-full" type="submit" id="forgotBtn">Send Reset Link</button>
+      <button type="button" onclick="hideAdminForgot()" style="background:none;border:none;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer;margin-top:12px;display:block">Back to log in</button>
+    </form>
+
+    <p style="font-size:11px;color:var(--subtle);margin-top:20px;line-height:1.6">
+      First time here? The server prints a starter admin email/password to its console
+      the first time it runs — check your terminal, then change the password.
+    </p>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-logo">
+      <img src="/assets/logo-icon.png" alt="" style="height:24px;width:auto">
+      Trust Admin
+    </div>
+    <div class="topbar-right">
+      <a href="/" style="font-size:13px;color:var(--muted);text-decoration:none">View Site</a>
+      <span class="topbar-user"><strong id="topbarName">—</strong></span>
+      <button class="btn btn-outline btn-sm" onclick="logout()">Log Out</button>
+    </div>
+  </div>
+
+  <div class="shell">
+    <div class="tabs">
+      <button class="tab-btn active" id="tabArticlesBtn" onclick="switchTab('articles')">Articles</button>
+      <button class="tab-btn" id="tabTeamBtn" onclick="switchTab('team')">Team</button>
+      <button class="tab-btn" id="tabQuotesBtn" onclick="switchTab('quotes')">Quote Leads</button>
+      <button class="tab-btn" id="tabChatBtn" onclick="switchTab('chat')">Chat Messages</button>
+      <button class="tab-btn" id="tabAnalyticsBtn" onclick="switchTab('analytics')">Analytics</button>
+      <button class="tab-btn" id="tabSettingsBtn" onclick="switchTab('settings')">Settings</button>
+    </div>
+
+    <!-- ARTICLES -->
+    <div class="tab-panel active" id="panelArticles">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Resources</div>
+          <div class="panel-sub">These articles power the Resources section on the homepage.</div>
+        </div>
+        <button class="btn" onclick="openArticleEditor()">
+          <i data-lucide="plus" class="icon" style="stroke:#fff"></i> New Article
+        </button>
+      </div>
+      <div class="card" id="articlesList">
+        <div class="empty-state">Loading…</div>
+      </div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="tab-panel" id="panelTeam">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Meet the Team</div>
+          <div class="panel-sub">These people and photos power the "Meet the Team" section on the homepage.</div>
+        </div>
+        <button class="btn" onclick="openTeamEditor()">
+          <i data-lucide="plus" class="icon" style="stroke:#fff"></i> Add Team Member
+        </button>
+      </div>
+      <div class="card" id="teamList">
+        <div class="empty-state">Loading…</div>
+      </div>
+    </div>
+
+    <!-- QUOTES -->
+    <div class="tab-panel" id="panelQuotes">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Quote Leads</div>
+          <div class="panel-sub">Requests submitted from the quote form on the homepage.</div>
+        </div>
+      </div>
+      <div class="card" id="quotesList">
+        <div class="empty-state">Loading…</div>
+      </div>
+    </div>
+
+    <!-- CHAT MESSAGES -->
+    <div class="tab-panel" id="panelChat">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Chat Messages</div>
+          <div class="panel-sub">Messages sent from the site's chat widget toward your WhatsApp number.</div>
+        </div>
+      </div>
+      <div class="card" id="chatList">
+        <div class="empty-state">Loading…</div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="tab-panel" id="panelAnalytics">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Analytics</div>
+          <div class="panel-sub">A simple, built-in visitor count — no third-party account needed.</div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:28px;margin-bottom:20px">
+        <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Total Pageviews (all time)</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:800" id="analyticsTotalViews">—</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px" class="form-row-2">
+        <div class="card" style="padding:28px">
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;margin-bottom:16px">Top Pages</h3>
+          <div id="analyticsTopPages"><div class="empty-state">Loading…</div></div>
+        </div>
+        <div class="card" style="padding:28px">
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;margin-bottom:16px">Top Referrers</h3>
+          <div id="analyticsTopReferrers"><div class="empty-state">Loading…</div></div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:28px;margin-top:20px">
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;margin-bottom:16px">Last 30 Days</h3>
+        <div id="analyticsChart" style="display:flex;align-items:flex-end;gap:3px;height:100px"></div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="tab-panel" id="panelSettings">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Settings</div>
+          <div class="panel-sub">WhatsApp number and live tracking shown on the homepage dashboard.</div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:28px; margin-bottom:20px">
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;margin-bottom:4px">My Account</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6">
+          Change the email or password you use to log in here. Your current password is required to
+          confirm either change — this also signs you out on any other device automatically if you
+          change your password.
+        </p>
+        <p class="msg" id="accountMsg"></p>
+        <form onsubmit="return saveAccount(event)">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" id="acEmail" required>
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">New Password (leave blank to keep current)</label>
+              <input class="form-input" type="password" id="acNewPassword" placeholder="At least 8 characters" minlength="8">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confirm New Password</label>
+              <input class="form-input" type="password" id="acConfirmPassword" placeholder="Re-enter new password" minlength="8">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Current Password (required to save)</label>
+            <input class="form-input" type="password" id="acCurrentPassword" required placeholder="••••••••">
+          </div>
+          <button class="btn" type="submit" id="saveAccountBtn">Save Account</button>
+        </form>
+      </div>
+
+      <div class="card" style="padding:28px; margin-bottom:20px">
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;margin-bottom:4px">WhatsApp</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6">
+          The site's chat widget sends visitor messages to this number. Without any extra setup,
+          it opens WhatsApp with the message pre-filled for the visitor to send. If you also fill in
+          the advanced fields below with a real Meta WhatsApp Business Cloud API token, messages get
+          delivered to you automatically instead.
+        </p>
+        <p class="msg" id="settingsMsg"></p>
+        <form onsubmit="return saveSettings(event)">
+          <div class="form-group">
+            <label class="form-label">WhatsApp Number (with country code, digits only)</label>
+            <input class="form-input" type="text" id="sWhatsappNumber" placeholder="15551234567">
+          </div>
+
+          <details style="margin:20px 0">
+            <summary style="cursor:pointer;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">Advanced (optional — Meta Cloud API)</summary>
+            <div style="margin-top:16px">
+              <div class="form-group">
+                <label class="form-label">API Access Token</label>
+                <input class="form-input" type="text" id="sApiToken" placeholder="EAAG...">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone Number ID</label>
+                <input class="form-input" type="text" id="sPhoneNumberId" placeholder="1029384756">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Webhook Verify Token (your own made-up string)</label>
+                <input class="form-input" type="text" id="sVerifyToken" placeholder="any-secret-string-you-choose">
+              </div>
+              <p style="font-size:11px;color:var(--subtle);line-height:1.6">
+                Webhook URL to give Meta: <code style="color:var(--text)" id="webhookUrlDisplay">/api/whatsapp/webhook</code>
+              </p>
+            </div>
+          </details>
+
+          <button class="btn" type="submit" id="saveSettingsBtn">Save</button>
+        </form>
+      </div>
+
+      <div class="card" style="padding:28px; margin-bottom:20px">
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;margin-bottom:4px">Google Sign-In</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6">
+          Lets visitors sign in with their Google account instead of creating a password. Needs a free
+          OAuth Client ID from <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener" style="color:var(--red-light)">Google Cloud Console</a> —
+          create an "OAuth client ID" of type "Web application", and add this site's URL under
+          "Authorized JavaScript origins". The circular Google button on the site stays hidden until
+          this is filled in.
+        </p>
+        <p class="msg" id="googleSettingsMsg"></p>
+        <form onsubmit="return saveGoogleSettings(event)">
+          <div class="form-group">
+            <label class="form-label">OAuth Client ID</label>
+            <input class="form-input" type="text" id="sGoogleClientId" placeholder="123456789-abc...apps.googleusercontent.com">
+          </div>
+          <button class="btn" type="submit" id="saveGoogleBtn">Save</button>
+        </form>
+      </div>
+
+      <div class="card" style="padding:28px">
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;margin-bottom:4px">Live Tracking</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6">
+          Updates the "My Move Dashboard" on the homepage — visitors see changes within one second.
+        </p>
+        <p class="msg" id="locationMsg"></p>
+        <form onsubmit="return saveLocation(event)">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Progress (%)</label>
+              <input class="form-input" type="number" id="lProgress" min="0" max="100">
+            </div>
+            <div class="form-group">
+              <label class="form-label">ETA text</label>
+              <input class="form-input" type="text" id="lEta" placeholder="2h 15m">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status text</label>
+            <input class="form-input" type="text" id="lStatus" placeholder="In Transit">
+          </div>
+          <div class="geo-panel" id="geoPanel">
+            <div class="geo-panel-header">
+              <span class="geo-status-dot" id="geoStatusDot"></span>
+              <div>
+                <div class="geo-panel-title">Live GPS Location</div>
+                <div class="geo-panel-sub">Open this page on the phone that's with the truck, then tap Share.</div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-outline geo-toggle-btn" id="geoToggleBtn" onclick="toggleLocationSharing()">
+              <i data-lucide="map-pin" class="icon"></i> Share My Location
+            </button>
+            <p class="msg" id="geoStatus" style="margin-top:12px"></p>
+            <div class="geo-readout" id="geoReadout" style="display:none">
+              <div class="geo-readout-item">
+                <span class="geo-readout-label">Coordinates</span>
+                <span class="geo-readout-value" id="geoCoordsValue">—</span>
+              </div>
+              <div class="geo-readout-item">
+                <span class="geo-readout-label">Accuracy</span>
+                <span class="geo-readout-value" id="geoAccuracyValue">—</span>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:11px;color:var(--subtle);margin:16px 0;line-height:1.6">
+            Last updated: <span id="locationUpdatedAt">—</span> · Source: <span id="locationSource">—</span>
+          </p>
+          <button class="btn" type="submit" id="saveLocationBtn">Update</button>
+        </form>
+      </div>
+
+      <div class="card" style="padding:28px;margin-top:20px">
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;margin-bottom:4px">Backups</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6">
+          A backup of your articles, team, quotes, settings, and uploaded photos runs automatically
+          once a day (last 14 kept). You can also grab one right now.
+        </p>
+        <button class="btn" onclick="createBackupNow()" id="createBackupBtn" style="margin-bottom:20px">
+          <i data-lucide="download" class="icon" style="stroke:#fff"></i> Create Backup Now
+        </button>
+        <div id="backupsList"><div class="empty-state">Loading…</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE EDITOR MODAL -->
+<div class="modal-overlay" id="editorOverlay" onclick="if(event.target===this) closeArticleEditor()">
+  <div class="modal-box">
+    <h2 class="modal-title" id="editorTitle">New Article</h2>
+    <p class="msg" id="editorMsg"></p>
+    <form id="articleForm" onsubmit="return saveArticle(event)">
+      <input type="hidden" id="articleId">
+      <div class="form-group">
+        <label class="form-label">Title</label>
+        <input class="form-input" type="text" id="fTitle" required placeholder="10 Decluttering Hacks for a Smooth Move">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Cover Image (optional)</label>
+        <div style="display:flex;align-items:center;gap:16px">
+          <img id="articlePhotoPreview" src="" alt="" style="width:64px;height:64px;border-radius:6px;object-fit:cover;background:#111;display:none">
+          <div id="articlePhotoPlaceholder" style="width:64px;height:64px;border-radius:6px;background:#111;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:10px;text-align:center">No image</div>
+          <div>
+            <input type="file" id="articlePhotoInput" accept="image/png,image/jpeg,image/webp,image/gif" onchange="previewArticlePhoto(event)">
+            <button type="button" class="btn-outline btn" id="removeArticlePhotoBtn" style="display:none;margin-top:8px;padding:6px 12px;font-size:11px" onclick="removeArticlePhoto()">Remove image</button>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--subtle);margin-top:6px">Shown on the Resources card instead of the icon/color below, and at the top of the article. Leave blank to use the icon and color instead.</p>
+      </div>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label class="form-label">Tag / Category</label>
+          <input class="form-input" type="text" id="fTag" placeholder="Packing Tips">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Icon</label>
+          <div class="icon-picker" id="iconPicker"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Card Color</label>
+        <div class="swatch-picker" id="swatchPicker"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Excerpt (shown on the homepage card)</label>
+        <textarea class="form-textarea" id="fExcerpt" style="min-height:60px" placeholder="A short one-to-two sentence summary." required></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Full Article Content</label>
+        <textarea class="form-textarea" id="fContent" placeholder="The full article text."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Video URL (optional)</label>
+        <input class="form-input" type="text" id="fVideoUrl" placeholder="YouTube, Vimeo, or a direct .mp4 link">
+        <p style="font-size:11px;color:var(--subtle);margin-top:6px">Shows an embedded video when someone opens this article. Leave blank for no video. For TikTok, the full link works best — open the video on tiktok.com and copy the address bar URL (tiktok.com/@user/video/...) rather than the mobile "Share" link if the preview doesn't show up.</p>
+      </div>
+      <div class="form-group">
+        <label class="form-checkbox-row">
+          <input type="checkbox" id="fPublished">
+          <span style="font-size:13px">Published (visible on the homepage)</span>
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" onclick="closeArticleEditor()">Cancel</button>
+        <button type="submit" class="btn" id="saveArticleBtn">Save Article</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- TEAM MEMBER EDITOR MODAL -->
+<div class="modal-overlay" id="teamEditorOverlay" onclick="if(event.target===this) closeTeamEditor()">
+  <div class="modal-box">
+    <h2 class="modal-title" id="teamEditorTitle">Add Team Member</h2>
+    <p class="msg" id="teamEditorMsg"></p>
+    <form id="teamForm" onsubmit="return saveTeamMember(event)">
+      <input type="hidden" id="teamMemberId">
+      <div class="form-group">
+        <label class="form-label">Photo</label>
+        <div style="display:flex;align-items:center;gap:16px">
+          <img id="teamPhotoPreview" src="" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;background:#111;display:none">
+          <div id="teamPhotoPlaceholder" style="width:64px;height:64px;border-radius:50%;background:#111;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;text-align:center">No photo</div>
+          <input type="file" id="teamPhotoInput" accept="image/png,image/jpeg,image/webp,image/gif" onchange="previewTeamPhoto(event)">
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input class="form-input" type="text" id="tName" required placeholder="Jane Doe">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Role</label>
+          <input class="form-input" type="text" id="tRole" placeholder="Lead Mover">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Short Bio (optional)</label>
+        <textarea class="form-textarea" id="tBio" style="min-height:60px" placeholder="A sentence or two about this person."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-checkbox-row">
+          <input type="checkbox" id="tActive" checked>
+          <span style="font-size:13px">Active (visible on the homepage)</span>
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" onclick="closeTeamEditor()">Cancel</button>
+        <button type="submit" class="btn" id="saveTeamBtn">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  lucide.createIcons();
+
+  const API_BASE = window.location.origin;
+  const TOKEN_KEY = 'tm_token';
+  const USER_KEY = 'tm_user';
+
+  const ICONS = ['package', 'clipboard-list', 'tag', 'key-round', 'truck', 'box'];
+  const SWATCHES = [
+    ['#1a0508', '#2a0a10'],
+    ['#100a1a', '#1a0a2a'],
+    ['#0a1a10', '#0a2a15'],
+    ['#1a1000', '#2a1800'],
+    ['#0a0f1a', '#0a152a'],
+    ['#1a0a1a', '#2a0a2a'],
+  ];
+  let selectedIcon = ICONS[0];
+  let selectedSwatch = SWATCHES[0];
+
+  function getToken() { return localStorage.getItem(TOKEN_KEY); }
+  function getStoredUser() {
+    try { return JSON.parse(localStorage.getItem(USER_KEY) || 'null'); } catch { return null; }
+  }
+  function setSession(token, user) {
+    localStorage.setItem(TOKEN_KEY, token);
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+  }
+  function clearSession() {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+  }
+
+  async function api(path, options = {}) {
+    const token = getToken();
+    const res = await fetch(`${API_BASE}${path}`, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(options.headers || {}),
+      },
+    });
+    let data = null;
+    try { data = await res.json(); } catch {}
+    if (!res.ok) throw new Error((data && data.error) || 'Something went wrong.');
+    return data;
+  }
+
+  // For multipart/form-data requests (photo uploads) — no Content-Type here,
+  // the browser sets it (with the right boundary) automatically for FormData.
+  async function apiUpload(path, formData, method = 'POST') {
+    const token = getToken();
+    const res = await fetch(`${API_BASE}${path}`, {
+      method,
+      headers: { ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+      body: formData,
+    });
+    let data = null;
+    try { data = await res.json(); } catch {}
+    if (!res.ok) throw new Error((data && data.error) || 'Something went wrong.');
+    return data;
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
+
+  let toastTimer = null;
+  function showToast(message, type = 'default') {
+    const el = document.getElementById('toast');
+    el.textContent = message;
+    el.className = `toast show${type === 'success' ? ' success' : ''}`;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { el.className = 'toast'; }, 4000);
+  }
+
+  function showMsg(id, message, type) {
+    const el = document.getElementById(id);
+    el.textContent = message;
+    el.className = `msg ${type}`;
+  }
+
+  // ── Login ──────────────────────────────────────────────────────
+  async function handleAdminLogin(event) {
+    event.preventDefault();
+    const btn = document.getElementById('loginBtn');
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    btn.disabled = true; btn.textContent = 'Logging in…';
+    try {
+      const data = await api('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
+      if (data.user.role !== 'admin') {
+        throw new Error('This account does not have admin access.');
+      }
+      setSession(data.token, data.user);
+      enterApp(data.user);
+    } catch (err) {
+      showMsg('loginMsg', err.message, 'error');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Log In';
+    }
+    return false;
+  }
+
+  function showAdminForgot() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('adminForgotForm').style.display = 'block';
+    document.getElementById('loginMsg').className = 'msg';
+  }
+  function hideAdminForgot() {
+    document.getElementById('adminForgotForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('loginMsg').className = 'msg';
+  }
+  async function handleAdminForgot(event) {
+    event.preventDefault();
+    const btn = document.getElementById('forgotBtn');
+    const email = document.getElementById('forgotEmail').value.trim();
+    btn.disabled = true; btn.textContent = 'Sending…';
+    try {
+      const data = await api('/api/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) });
+      showMsg('loginMsg', data.message, 'success');
+      hideAdminForgot();
+    } catch (err) {
+      showMsg('loginMsg', err.message, 'error');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Send Reset Link';
+    }
+    return false;
+  }
+
+  function logout() {
+    clearSession();
+    document.getElementById('app').classList.remove('active');
+    document.getElementById('loginGate').style.display = 'flex';
+    if (liveRefreshInterval) { clearInterval(liveRefreshInterval); liveRefreshInterval = null; }
+  }
+
+  function enterApp(user) {
+    document.getElementById('loginGate').style.display = 'none';
+    document.getElementById('app').classList.add('active');
+    document.getElementById('topbarName').textContent = user.name;
+    document.getElementById('webhookUrlDisplay').textContent = `${window.location.origin}/api/whatsapp/webhook`;
+    document.getElementById('acEmail').value = user.email;
+    loadArticles();
+    loadTeam();
+    loadQuotes();
+    loadChatMessages();
+    loadSettingsAdmin();
+    loadLocationAdmin();
+    loadAnalytics();
+    loadBackups();
+    startLiveRefresh();
+  }
+
+  // Keeps Quote Leads and Chat Messages current without needing a manual
+  // page reload — so a new lead or message shows up on its own. Runs in the
+  // background regardless of which tab is active; only one interval is ever
+  // running at a time even if enterApp() is somehow called twice.
+  let liveRefreshInterval = null;
+  const LIVE_REFRESH_MS = 20000;
+  function startLiveRefresh() {
+    if (liveRefreshInterval) clearInterval(liveRefreshInterval);
+    liveRefreshInterval = setInterval(() => {
+      loadQuotes();
+      loadChatMessages();
+    }, LIVE_REFRESH_MS);
+  }
+
+  async function checkSession() {
+    const user = getStoredUser();
+    if (!user || !getToken()) return;
+    try {
+      const data = await api('/api/auth/me');
+      if (data.user.role === 'admin') enterApp(data.user);
+      else clearSession();
+    } catch {
+      clearSession();
+    }
+  }
+
+  // ── Tabs ───────────────────────────────────────────────────────
+  const TABS = ['articles', 'team', 'quotes', 'chat', 'analytics', 'settings'];
+  function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+  function switchTab(tab) {
+    TABS.forEach(t => {
+      document.getElementById(`tab${capitalize(t)}Btn`).classList.toggle('active', t === tab);
+      document.getElementById(`panel${capitalize(t)}`).classList.toggle('active', t === tab);
+    });
+  }
+
+  // ── Articles ───────────────────────────────────────────────────
+  let articlesCache = [];
+
+  async function loadArticles() {
+    const list = document.getElementById('articlesList');
+    try {
+      const data = await api('/api/articles/all');
+      articlesCache = data.articles;
+      if (articlesCache.length === 0) {
+        list.innerHTML = '<div class="empty-state">No articles yet. Click "New Article" to add your first post.</div>';
+        return;
+      }
+      list.innerHTML = articlesCache.map(renderArticleRow).join('');
+      lucide.createIcons();
+    } catch (err) {
+      list.innerHTML = `<div class="empty-state">Couldn't load articles: ${escapeHtml(err.message)}</div>`;
+    }
+  }
+
+  function renderArticleRow(a) {
+    const thumb = a.imageUrl
+      ? `<img src="${escapeHtml(a.imageUrl)}" alt="" style="width:44px;height:44px;border-radius:6px;object-fit:cover;flex-shrink:0">`
+      : `<div class="article-thumb" style="background:linear-gradient(135deg,${escapeHtml(a.gradientFrom)},${escapeHtml(a.gradientTo)})"><i data-lucide="${escapeHtml(a.icon)}"></i></div>`;
+    return `
+      <div class="article-row">
+        ${thumb}
+        <div class="article-info">
+          <div class="article-title">${escapeHtml(a.title)}</div>
+          <div class="article-meta">
+            <span class="badge ${a.published ? 'published' : 'draft'}">${a.published ? 'Published' : 'Draft'}</span>
+            <span>${escapeHtml(a.tag)}</span>
+            <span>Updated ${new Date(a.updatedAt).toLocaleDateString()}</span>
+          </div>
+        </div>
+        <div class="row-actions">
+          <button class="icon-btn" title="Edit" onclick="openArticleEditor('${a.id}')"><i data-lucide="pencil" class="icon"></i></button>
+          <button class="icon-btn" title="${a.published ? 'Unpublish' : 'Publish'}" onclick="togglePublish('${a.id}', ${!a.published})">
+            <i data-lucide="${a.published ? 'eye-off' : 'eye'}" class="icon"></i>
+          </button>
+          <button class="icon-btn" title="Delete" onclick="deleteArticle('${a.id}')"><i data-lucide="trash-2" class="icon"></i></button>
+        </div>
+      </div>`;
+  }
+
+  function buildIconPicker() {
+    const wrap = document.getElementById('iconPicker');
+    wrap.innerHTML = ICONS.map(name =>
+      `<button type="button" class="${name === selectedIcon ? 'active' : ''}" data-icon="${name}" onclick="pickIcon('${name}')"><i data-lucide="${name}" class="icon"></i></button>`
+    ).join('');
+    lucide.createIcons();
+  }
+  function pickIcon(name) {
+    selectedIcon = name;
+    document.querySelectorAll('#iconPicker button').forEach(b => b.classList.toggle('active', b.dataset.icon === name));
+  }
+
+  function buildSwatchPicker() {
+    const wrap = document.getElementById('swatchPicker');
+    wrap.innerHTML = SWATCHES.map((s, i) =>
+      `<button type="button" class="${s[0] === selectedSwatch[0] ? 'active' : ''}" data-idx="${i}" style="background:linear-gradient(135deg,${s[0]},${s[1]})" onclick="pickSwatch(${i})"></button>`
+    ).join('');
+  }
+  function pickSwatch(i) {
+    selectedSwatch = SWATCHES[i];
+    document.querySelectorAll('#swatchPicker button').forEach((b, idx) => b.classList.toggle('active', idx === i));
+  }
+
+  let articlePhotoFile = null;
+  let articleRemoveImage = false;
+
+  function openArticleEditor(id) {
+    document.getElementById('articleForm').reset();
+    document.getElementById('editorMsg').className = 'msg';
+    selectedIcon = ICONS[0];
+    selectedSwatch = SWATCHES[0];
+    articlePhotoFile = null;
+    articleRemoveImage = false;
+    document.getElementById('articlePhotoPreview').style.display = 'none';
+    document.getElementById('articlePhotoPlaceholder').style.display = 'flex';
+    document.getElementById('removeArticlePhotoBtn').style.display = 'none';
+
+    if (id) {
+      const a = articlesCache.find(x => x.id === id);
+      document.getElementById('editorTitle').textContent = 'Edit Article';
+      document.getElementById('articleId').value = a.id;
+      document.getElementById('fTitle').value = a.title;
+      document.getElementById('fTag').value = a.tag;
+      document.getElementById('fExcerpt').value = a.excerpt;
+      document.getElementById('fContent').value = a.content || '';
+      document.getElementById('fVideoUrl').value = a.videoUrl || '';
+      document.getElementById('fPublished').checked = a.published;
+      selectedIcon = a.icon;
+      selectedSwatch = [a.gradientFrom, a.gradientTo];
+      if (a.imageUrl) {
+        const img = document.getElementById('articlePhotoPreview');
+        img.src = a.imageUrl;
+        img.style.display = 'block';
+        document.getElementById('articlePhotoPlaceholder').style.display = 'none';
+        document.getElementById('removeArticlePhotoBtn').style.display = 'inline-flex';
+      }
+    } else {
+      document.getElementById('editorTitle').textContent = 'New Article';
+      document.getElementById('articleId').value = '';
+    }
+
+    buildIconPicker();
+    buildSwatchPicker();
+    document.getElementById('editorOverlay').classList.add('open');
+  }
+
+  function closeArticleEditor() {
+    document.getElementById('editorOverlay').classList.remove('open');
+  }
+
+  function previewArticlePhoto(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    articlePhotoFile = file;
+    articleRemoveImage = false;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = document.getElementById('articlePhotoPreview');
+      img.src = e.target.result;
+      img.style.display = 'block';
+      document.getElementById('articlePhotoPlaceholder').style.display = 'none';
+      document.getElementById('removeArticlePhotoBtn').style.display = 'inline-flex';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function removeArticlePhoto() {
+    articlePhotoFile = null;
+    articleRemoveImage = true;
+    document.getElementById('articlePhotoInput').value = '';
+    document.getElementById('articlePhotoPreview').style.display = 'none';
+    document.getElementById('articlePhotoPlaceholder').style.display = 'flex';
+    document.getElementById('removeArticlePhotoBtn').style.display = 'none';
+  }
+
+  async function saveArticle(event) {
+    event.preventDefault();
+    const btn = document.getElementById('saveArticleBtn');
+    const id = document.getElementById('articleId').value;
+
+    let videoUrl = document.getElementById('fVideoUrl').value.trim();
+    if (/^https?:\/\/(vm|vt)\.tiktok\.com\//.test(videoUrl)) {
+      btn.disabled = true; btn.textContent = 'Resolving video link…';
+      try {
+        const resolved = await api('/api/articles/resolve-video-url', { method: 'POST', body: JSON.stringify({ url: videoUrl }) });
+        if (resolved.resolvedUrl && resolved.resolvedUrl !== videoUrl) {
+          videoUrl = resolved.resolvedUrl;
+        } else {
+          showToast("Couldn't expand that TikTok share link — try opening it in a browser and pasting the full tiktok.com/@user/video/... URL instead.");
+        }
+      } catch (err) {
+        showToast(`Couldn't resolve the TikTok link (${err.message}) — saving it as typed.`);
+      }
+    }
+
+    const formData = new FormData();
+    formData.append('title', document.getElementById('fTitle').value.trim());
+    formData.append('tag', document.getElementById('fTag').value.trim() || 'General');
+    formData.append('excerpt', document.getElementById('fExcerpt').value.trim());
+    formData.append('content', document.getElementById('fContent').value.trim());
+    formData.append('videoUrl', videoUrl);
+    formData.append('icon', selectedIcon);
+    formData.append('gradientFrom', selectedSwatch[0]);
+    formData.append('gradientTo', selectedSwatch[1]);
+    formData.append('published', document.getElementById('fPublished').checked);
+    if (articlePhotoFile) formData.append('image', articlePhotoFile);
+    if (articleRemoveImage) formData.append('removeImage', 'true');
+
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      if (id) {
+        await apiUpload(`/api/articles/${id}`, formData, 'PUT');
+      } else {
+        await apiUpload('/api/articles', formData, 'POST');
+      }
+      showToast('Article saved.', 'success');
+      closeArticleEditor();
+      loadArticles();
+    } catch (err) {
+      showMsg('editorMsg', err.message, 'error');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Save Article';
+    }
+    return false;
+  }
+
+  async function togglePublish(id, publish) {
+    try {
+      await api(`/api/articles/${id}`, { method: 'PUT', body: JSON.stringify({ published: publish }) });
+      showToast(publish ? 'Article published.' : 'Article unpublished.', 'success');
+      loadArticles();
+    } catch (err) {
+      showToast(err.message);
+    }
+  }
+
+  async function deleteArticle(id) {
+    if (!confirm('Delete this article? This cannot be undone.')) return;
+    try {
+      await api(`/api/articles/${id}`, { method: 'DELETE' });
+      showToast('Article deleted.', 'success');
+      loadArticles();
+    } catch (err) {
+      showToast(err.message);
+    }
+  }
+
+  // ── Team ───────────────────────────────────────────────────────
+  let teamCache = [];
+  let teamPhotoFile = null;
+
+  async function loadTeam() {
+    const list = document.getElementById('teamList');
+    try {
+      const data = await api('/api/team/all');
+      teamCache = data.team;
+      if (teamCache.length === 0) {
+        list.innerHTML = '<div class="empty-state">No team members yet. Click "Add Team Member" to add your first one.</div>';
+        return;
+      }
+      list.innerHTML = teamCache.map(renderTeamRow).join('');
+      lucide.createIcons();
+    } catch (err) {
+      list.innerHTML = `<div class="empty-state">Couldn't load the team: ${escapeHtml(err.message)}</div>`;
+    }
+  }
+
+  function renderTeamRow(m) {
+    const thumb = m.photoUrl
+      ? `<img src="${escapeHtml(m.photoUrl)}" alt="" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0">`
+      : `<div class="article-thumb" style="background:var(--red);border-radius:50%">${escapeHtml(m.initials || '?')}</div>`;
+    return `
+      <div class="article-row">
+        ${thumb}
+        <div class="article-info">
+          <div class="article-title">${escapeHtml(m.name)}</div>
+          <div class="article-meta">
+            <span class="badge ${m.active !== false ? 'published' : 'draft'}">${m.active !== false ? 'Active' : 'Hidden'}</span>
+            <span>${escapeHtml(m.role)}</span>
+          </div>
+        </div>
+        <div class="row-actions">
+          <button class="icon-btn" title="Edit" onclick="openTeamEditor('${m.id}')"><i data-lucide="pencil" class="icon"></i></button>
+          <button class="icon-btn" title="${m.active !== false ? 'Hide' : 'Show'}" onclick="toggleTeamActive('${m.id}', ${!(m.active !== false)})">
+            <i data-lucide="${m.active !== false ? 'eye-off' : 'eye'}" class="icon"></i>
+          </button>
+          <button class="icon-btn" title="Delete" onclick="deleteTeamMember('${m.id}')"><i data-lucide="trash-2" class="icon"></i></button>
+        </div>
+      </div>`;
+  }
+
+  function openTeamEditor(id) {
+    document.getElementById('teamForm').reset();
+    document.getElementById('teamEditorMsg').className = 'msg';
+    document.getElementById('teamPhotoPreview').style.display = 'none';
+    document.getElementById('teamPhotoPlaceholder').style.display = 'flex';
+    teamPhotoFile = null;
+
+    if (id) {
+      const m = teamCache.find(x => x.id === id);
+      document.getElementById('teamEditorTitle').textContent = 'Edit Team Member';
+      document.getElementById('teamMemberId').value = m.id;
+      document.getElementById('tName').value = m.name;
+      document.getElementById('tRole').value = m.role;
+      document.getElementById('tBio').value = m.bio || '';
+      document.getElementById('tActive').checked = m.active !== false;
+      if (m.photoUrl) {
+        const img = document.getElementById('teamPhotoPreview');
+        img.src = m.photoUrl;
+        img.style.display = 'block';
+        document.getElementById('teamPhotoPlaceholder').style.display = 'none';
+      }
+    } else {
+      document.getElementById('teamEditorTitle').textContent = 'Add Team Member';
+      document.getElementById('teamMemberId').value = '';
+      document.getElementById('tActive').checked = true;
+    }
+
+    document.getElementById('teamEditorOverlay').classList.add('open');
+  }
+
+  function closeTeamEditor() {
+    document.getElementById('teamEditorOverlay').classList.remove('open');
+  }
+
+  function previewTeamPhoto(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    teamPhotoFile = file;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = document.getElementById('teamPhotoPreview');
+      img.src = e.target.result;
+      img.style.display = 'block';
+      document.getElementById('teamPhotoPlaceholder').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  async function saveTeamMember(event) {
+    event.preventDefault();
+    const btn = document.getElementById('saveTeamBtn');
+    const id = document.getElementById('teamMemberId').value;
+
+    const formData = new FormData();
+    formData.append('name', document.getElementById('tName').value.trim());
+    formData.append('role', document.getElementById('tRole').value.trim());
+    formData.append('bio', document.getElementById('tBio').value.trim());
+    formData.append('active', document.getElementById('tActive').checked);
+    if (teamPhotoFile) formData.append('photo', teamPhotoFile);
+
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      if (id) {
+        await apiUpload(`/api/team/${id}`, formData, 'PUT');
+      } else {
+        await apiUpload('/api/team', formData, 'POST');
+      }
+      showToast('Team member saved.', 'success');
+      closeTeamEditor();
+      loadTeam();
+    } catch (err) {
+      const el = document.getElementById('teamEditorMsg');
+      el.textContent = err.message;
+      el.className = 'msg error';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Save';
+    }
+    return false;
+  }
+
+  async function toggleTeamActive(id, active) {
+    try {
+      const formData = new FormData();
+      formData.append('active', active);
+      await apiUpload(`/api/team/${id}`, formData, 'PUT');
+      showToast(active ? 'Team member shown on site.' : 'Team member hidden from site.', 'success');
+      loadTeam();
+    } catch (err) {
+      showToast(err.message);
+    }
+  }
+
+  async function deleteTeamMember(id) {
+    if (!confirm('Remove this team member? This cannot be undone.')) return;
+    try {
+      await api(`/api/team/${id}`, { method: 'DELETE' });
+      showToast('Team member removed.', 'success');
+      loadTeam();
+    } catch (err) {
+      showToast(err.message);
+    }
+  }
+
+  // ── Quotes ─────────────────────────────────────────────────────
+  async function loadQuotes() {
+    const list = document.getElementById('quotesList');
+    try {
+      const data = await api('/api/quotes');
+      if (data.quotes.length === 0) {
+        list.innerHTML = '<div class="empty-state">No quote requests yet.</div>';
+        return;
+      }
+      list.innerHTML = data.quotes.map(renderQuoteRow).join('');
+      lucide.createIcons();
+    } catch (err) {
+      list.innerHTML = `<div class="empty-state">Couldn't load quotes: ${escapeHtml(err.message)}</div>`;
+    }
+  }
+
+  function renderQuoteRow(q) {
+    const route = q.fromZip || q.toZip ? `${escapeHtml(q.fromZip || '?')} → ${escapeHtml(q.toZip || '?')}` : escapeHtml(q.route || '—');
+    const contactBits = [];
+    if (q.email) contactBits.push(`<a href="mailto:${escapeHtml(q.email)}" class="quote-contact-link"><i data-lucide="mail" class="icon"></i>${escapeHtml(q.email)}</a>`);
+    if (q.phone) contactBits.push(`<a href="tel:${escapeHtml(q.phone)}" class="quote-contact-link"><i data-lucide="phone" class="icon"></i>${escapeHtml(q.phone)}</a>`);
+    const contactLine = contactBits.length
+      ? `<div class="quote-contact">${contactBits.join('')}</div>`
+      : '<div class="quote-contact quote-contact-empty">No email or phone provided</div>';
+
+    return `
+      <div class="quote-row">
+        <div class="article-info">
+          <div class="article-title">${escapeHtml(q.name || 'No name provided')}</div>
+          ${contactLine}
+          <div class="article-meta">
+            <span class="badge status-${escapeHtml(q.status)}">${escapeHtml(q.status)}</span>
+            ${q.email ? (q.emailedAt ? '<span class="badge published">Estimate emailed</span>' : '<span class="badge draft">Email not sent</span>') : ''}
+            <span>${route}</span>
+            ${q.homeSize ? `<span>${escapeHtml(q.homeSize)}</span>` : ''}
+            ${q.date ? `<span>Move date: ${escapeHtml(q.date)}</span>` : ''}
+            <span>${new Date(q.createdAt).toLocaleString()}</span>
+          </div>
+        </div>
+        <select class="form-select" style="width:auto" onchange="updateQuoteStatus('${q.id}', this.value)">
+          ${['new','contacted','booked','closed'].map(s => `<option value="${s}" ${s === q.status ? 'selected' : ''}>${s}</option>`).join('')}
+        </select>
+      </div>`;
+  }
+
+  async function updateQuoteStatus(id, status) {
+    try {
+      await api(`/api/quotes/${id}`, { method: 'PATCH', body: JSON.stringify({ status }) });
+      showToast('Lead updated.', 'success');
+      loadQuotes();
+    } catch (err) {
+      showToast(err.message);
+    }
+  }
+
+  // ── Chat Messages ──────────────────────────────────────────────
+  async function loadChatMessages() {
+    const list = document.getElementById('chatList');
+    try {
+      const data = await api('/api/chat-messages');
+      if (data.messages.length === 0) {
+        list.innerHTML = '<div class="empty-state">No chat messages yet.</div>';
+        return;
+      }
+      list.innerHTML = data.messages.map(renderChatRow).join('');
+    } catch (err) {
+      list.innerHTML = `<div class="empty-state">Couldn't load chat messages: ${escapeHtml(err.message)}</div>`;
+    }
+  }
+
+  function renderChatRow(c) {
+    return `
+      <div class="quote-row">
+        <div class="article-info">
+          <div class="article-title">${escapeHtml(c.name)}</div>
+          <div class="article-meta">
+            <span class="badge ${c.sentViaApi ? 'published' : 'draft'}">${c.sentViaApi ? 'Sent via API' : 'Needs WhatsApp follow-up'}</span>
+            <span>${escapeHtml(c.message)}</span>
+            <span>${new Date(c.createdAt).toLocaleString()}</span>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // ── Settings ───────────────────────────────────────────────────
+  async function loadSettingsAdmin() {
+    try {
+      const data = await api('/api/settings/all');
+      const s = data.settings;
+      document.getElementById('sWhatsappNumber').value = s.whatsappNumber || '';
+      document.getElementById('sApiToken').value = s.whatsappApiToken || '';
+      document.getElementById('sPhoneNumberId').value = s.whatsappPhoneNumberId || '';
+      document.getElementById('sVerifyToken').value = s.whatsappWebhookVerifyToken || '';
+      document.getElementById('sGoogleClientId').value = s.googleClientId || '';
+    } catch (err) {
+      showToast(err.message);
+    }
+  }
+
+  async function saveGoogleSettings(event) {
+    event.preventDefault();
+    const btn = document.getElementById('saveGoogleBtn');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      await api('/api/settings', {
+        method: 'PUT',
+        body: JSON.stringify({ googleClientId: document.getElementById('sGoogleClientId').value.trim() }),
+      });
+      showToast('Google Sign-In settings saved.', 'success');
+    } catch (err) {
+      const el = document.getElementById('googleSettingsMsg');
+      el.textContent = err.message;
+      el.className = 'msg error';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Save';
+    }
+    return false;
+  }
+
+  async function saveAccount(event) {
+    event.preventDefault();
+    const btn = document.getElementById('saveAccountBtn');
+    const newEmail = document.getElementById('acEmail').value.trim();
+    const newPassword = document.getElementById('acNewPassword').value;
+    const confirmPassword = document.getElementById('acConfirmPassword').value;
+    const currentPassword = document.getElementById('acCurrentPassword').value;
+
+    document.getElementById('accountMsg').className = 'msg';
+
+    if (newPassword && newPassword !== confirmPassword) {
+      const el = document.getElementById('accountMsg');
+      el.textContent = "New passwords don't match.";
+      el.className = 'msg error';
+      return false;
+    }
+
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      const payload = { currentPassword };
+      if (newEmail) payload.newEmail = newEmail;
+      if (newPassword) payload.newPassword = newPassword;
+
+      const data = await api('/api/auth/account', { method: 'PUT', body: JSON.stringify(payload) });
+      setSession(data.token, data.user);
+      document.getElementById('topbarName').textContent = data.user.name;
+      document.getElementById('acNewPassword').value = '';
+      document.getElementById('acConfirmPassword').value = '';
+      document.getElementById('acCurrentPassword').value = '';
+      showToast('Account updated.', 'success');
+    } catch (err) {
+      const el = document.getElementById('accountMsg');
+      el.textContent = err.message;
+      el.className = 'msg error';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Save Account';
+    }
+    return false;
+  }
+
+  async function saveSettings(event) {
+    event.preventDefault();
+    const btn = document.getElementById('saveSettingsBtn');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      await api('/api/settings', {
+        method: 'PUT',
+        body: JSON.stringify({
+          whatsappNumber: document.getElementById('sWhatsappNumber').value.trim(),
+          whatsappApiToken: document.getElementById('sApiToken').value.trim(),
+          whatsappPhoneNumberId: document.getElementById('sPhoneNumberId').value.trim(),
+          whatsappWebhookVerifyToken: document.getElementById('sVerifyToken').value.trim(),
+        }),
+      });
+      showToast('Settings saved.', 'success');
+    } catch (err) {
+      const el = document.getElementById('settingsMsg');
+      el.textContent = err.message;
+      el.className = 'msg error';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Save';
+    }
+    return false;
+  }
+
+  // ── Live Tracking / Location ───────────────────────────────────
+  async function loadLocationAdmin() {
+    try {
+      const data = await api('/api/location');
+      const l = data.location;
+      document.getElementById('lProgress').value = l.progressPercent ?? '';
+      document.getElementById('lEta').value = l.etaText || '';
+      document.getElementById('lStatus').value = l.statusText || '';
+      document.getElementById('locationUpdatedAt').textContent = l.updatedAt ? new Date(l.updatedAt).toLocaleString() : '—';
+      document.getElementById('locationSource').textContent = l.source || '—';
+      if (l.source === 'gps' && l.lat != null && l.lng != null) {
+        showGeoStatus(`Last shared: ${new Date(l.updatedAt).toLocaleString()}`, '');
+        const readout = document.getElementById('geoReadout');
+        readout.style.display = 'grid';
+        document.getElementById('geoCoordsValue').textContent = `${l.lat.toFixed(5)}, ${l.lng.toFixed(5)}`;
+        const accEl = document.getElementById('geoAccuracyValue');
+        if (l.accuracy != null) {
+          const accMeters = Math.round(l.accuracy);
+          accEl.className = 'geo-readout-value ' + (accMeters <= 50 ? 'accuracy-good' : accMeters <= 500 ? 'accuracy-fair' : 'accuracy-poor');
+          accEl.textContent = `±${accMeters}m`;
+          if (accMeters > 500) {
+            showGeoStatus(`Last shared: ${new Date(l.updatedAt).toLocaleString()} — accuracy was ±${accMeters}m, which usually means this was estimated from WiFi/network rather than a real GPS fix (common on desktop browsers or indoors). It'll be much more precise from a phone outdoors with location services on.`, '');
+          }
+        } else {
+          accEl.textContent = 'Unknown';
+        }
+      }
+    } catch (err) {
+      showToast(err.message);
+    }
+  }
+
+  async function saveLocation(event) {
+    event.preventDefault();
+    const btn = document.getElementById('saveLocationBtn');
+    btn.disabled = true; btn.textContent = 'Updating…';
+    try {
+      await api('/api/location', {
+        method: 'PUT',
+        body: JSON.stringify({
+          progressPercent: document.getElementById('lProgress').value,
+          etaText: document.getElementById('lEta').value.trim(),
+          statusText: document.getElementById('lStatus').value.trim(),
+        }),
+      });
+      showToast('Live tracking updated — visitors will see it within a second.', 'success');
+      loadLocationAdmin();
+    } catch (err) {
+      const el = document.getElementById('locationMsg');
+      el.textContent = err.message;
+      el.className = 'msg error';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Update';
+    }
+    return false;
+  }
+
+  // ── Live GPS location sharing ────────────────────────────────────
+  // Uses the browser's own Geolocation API — the person with the truck opens
+  // this page on their phone, taps the button, grants permission once, and
+  // their real position streams to the dashboard from there. Note: browsers
+  // require HTTPS for this (localhost is exempted for testing).
+  let geoWatchId = null;
+  let lastGeoSendAt = 0;
+  const GEO_SEND_THROTTLE_MS = 15000; // avoid hammering the server on every tiny GPS update
+
+  function showGeoStatus(message, type) {
+    const el = document.getElementById('geoStatus');
+    el.textContent = message;
+    el.className = type ? `msg ${type}` : 'msg';
+    if (message) el.style.display = 'block';
+  }
+
+  function toggleLocationSharing() {
+    if (geoWatchId !== null) stopLocationSharing();
+    else startLocationSharing();
+  }
+
+  function startLocationSharing() {
+    if (!navigator.geolocation) {
+      showGeoStatus('This browser does not support location sharing.', 'error');
+      return;
+    }
+    if (!window.isSecureContext) {
+      showGeoStatus('Location sharing needs HTTPS (or localhost) to work — this page is neither.', 'error');
+      return;
+    }
+
+    showGeoStatus('Requesting location permission…', '');
+    geoWatchId = navigator.geolocation.watchPosition(handleGeoUpdate, handleGeoError, {
+      enableHighAccuracy: true,
+      maximumAge: 10000,
+      timeout: 20000,
+    });
+
+    const btn = document.getElementById('geoToggleBtn');
+    btn.innerHTML = '<i data-lucide="square" class="icon"></i> Stop Sharing Location';
+    document.getElementById('geoStatusDot').classList.add('active');
+    lucide.createIcons();
+  }
+
+  function stopLocationSharing() {
+    if (geoWatchId !== null) {
+      navigator.geolocation.clearWatch(geoWatchId);
+      geoWatchId = null;
+    }
+    const btn = document.getElementById('geoToggleBtn');
+    btn.innerHTML = '<i data-lucide="map-pin" class="icon"></i> Share My Location';
+    document.getElementById('geoStatusDot').classList.remove('active');
+    lucide.createIcons();
+    showGeoStatus('Not sharing location.', '');
+  }
+
+  async function handleGeoUpdate(position) {
+    const { latitude, longitude, accuracy } = position.coords;
+    showGeoStatus(`Sharing live — last update ${new Date().toLocaleTimeString()}`, 'success');
+
+    const readout = document.getElementById('geoReadout');
+    readout.style.display = 'grid';
+    document.getElementById('geoCoordsValue').textContent = `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+    const accEl = document.getElementById('geoAccuracyValue');
+    const accMeters = Math.round(accuracy);
+    accEl.className = 'geo-readout-value ' + (accMeters <= 50 ? 'accuracy-good' : accMeters <= 500 ? 'accuracy-fair' : 'accuracy-poor');
+    accEl.textContent = accMeters <= 500 ? `±${accMeters}m` : `±${accMeters}m (likely approximate — see note below)`;
+
+    const now = Date.now();
+    if (now - lastGeoSendAt < GEO_SEND_THROTTLE_MS) return; // throttle how often we hit the server
+    lastGeoSendAt = now;
+
+    try {
+      await api('/api/location', { method: 'PUT', body: JSON.stringify({ lat: latitude, lng: longitude, accuracy: accMeters, source: 'gps' }) });
+      document.getElementById('locationUpdatedAt').textContent = new Date().toLocaleString();
+      document.getElementById('locationSource').textContent = 'gps';
+    } catch (err) {
+      showGeoStatus(`Sharing, but couldn't reach the server: ${err.message}`, 'error');
+    }
+  }
+
+  function handleGeoError(err) {
+    let msg = 'Could not get your location.';
+    if (err.code === err.PERMISSION_DENIED) msg = 'Location permission was denied. Allow it in your browser settings to share.';
+    else if (err.code === err.POSITION_UNAVAILABLE) msg = 'Location unavailable right now — try again in a moment.';
+    else if (err.code === err.TIMEOUT) msg = 'Location request timed out.';
+    showGeoStatus(msg, 'error');
+    stopLocationSharing();
+  }
+
+  // ── Analytics ──────────────────────────────────────────────────
+  async function loadAnalytics() {
+    try {
+      const data = await api('/api/analytics/summary');
+
+      document.getElementById('analyticsTotalViews').textContent = data.totalViews.toLocaleString();
+
+      const pagesEl = document.getElementById('analyticsTopPages');
+      pagesEl.innerHTML = data.topPages.length
+        ? data.topPages.map(p => `
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px">
+              <span style="color:var(--muted)">${escapeHtml(p.path)}</span>
+              <strong>${p.count.toLocaleString()}</strong>
+            </div>`).join('')
+        : '<div class="empty-state">No pageviews yet.</div>';
+
+      const refEl = document.getElementById('analyticsTopReferrers');
+      refEl.innerHTML = data.topReferrers.length
+        ? data.topReferrers.map(r => `
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px">
+              <span style="color:var(--muted)">${escapeHtml(r.referrer)}</span>
+              <strong>${r.count.toLocaleString()}</strong>
+            </div>`).join('')
+        : '<div class="empty-state">No referrer data yet.</div>';
+
+      const chartEl = document.getElementById('analyticsChart');
+      const max = Math.max(1, ...data.last30Days.map(d => d.count));
+      chartEl.innerHTML = data.last30Days.length
+        ? data.last30Days.map(d => `
+            <div title="${escapeHtml(d.day)}: ${d.count}" style="flex:1;background:var(--red);opacity:0.85;height:${Math.max(4, (d.count / max) * 100)}%;min-width:3px"></div>`).join('')
+        : '<div class="empty-state">No data yet.</div>';
+    } catch (err) {
+      showToast(err.message);
+    }
+  }
+
+  // ── Backups ────────────────────────────────────────────────────
+  async function loadBackups() {
+    const list = document.getElementById('backupsList');
+    try {
+      const data = await api('/api/backups');
+      if (data.backups.length === 0) {
+        list.innerHTML = '<div class="empty-state">No backups yet — the first automatic one runs shortly after the server starts.</div>';
+        return;
+      }
+      list.innerHTML = data.backups.map(b => `
+        <div class="quote-row">
+          <div class="article-info">
+            <div class="article-title">${escapeHtml(b.filename)}</div>
+            <div class="article-meta">
+              <span>${(b.sizeBytes / 1024).toFixed(0)} KB</span>
+              <span>${new Date(b.createdAt).toLocaleString()}</span>
+            </div>
+          </div>
+          <button class="icon-btn" onclick="downloadBackup('${escapeHtml(b.filename)}')" title="Download">
+            <i data-lucide="download" class="icon"></i>
+          </button>
+        </div>`).join('');
+      lucide.createIcons();
+    } catch (err) {
+      list.innerHTML = `<div class="empty-state">Couldn't load backups: ${escapeHtml(err.message)}</div>`;
+    }
+  }
+
+  async function downloadBackup(filename) {
+    try {
+      const res = await fetch(`${API_BASE}/api/backups/${encodeURIComponent(filename)}`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      });
+      if (!res.ok) throw new Error('Download failed.');
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      showToast(err.message);
+    }
+  }
+
+  async function createBackupNow() {
+    const btn = document.getElementById('createBackupBtn');
+    btn.disabled = true; btn.textContent = 'Creating…';
+    try {
+      await api('/api/backups', { method: 'POST' });
+      showToast('Backup created.', 'success');
+      loadBackups();
+    } catch (err) {
+      showToast(err.message);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i data-lucide="download" class="icon" style="stroke:#fff"></i> Create Backup Now';
+      lucide.createIcons();
+    }
+  }
+
+  checkSession();
+</script>
+</body>
+</html>

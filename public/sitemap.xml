@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Replace "https://your-domain-here.com" below with your real domain once
+  this is deployed — search engines need absolute URLs here, not relative
+  ones. The human-readable /sitemap.html page is separate from this file;
+  this one is just for Google/Bing.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://your-domain-here.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://your-domain-here.com/residential.html</loc><priority>0.8</priority></url>
+  <url><loc>https://your-domain-here.com/commercial.html</loc><priority>0.8</priority></url>
+  <url><loc>https://your-domain-here.com/packing.html</loc><priority>0.8</priority></url>
+  <url><loc>https://your-domain-here.com/long-distance.html</loc><priority>0.8</priority></url>
+  <url><loc>https://your-domain-here.com/careers.html</loc><priority>0.5</priority></url>
+  <url><loc>https://your-domain-here.com/brand.html</loc><priority>0.4</priority></url>
+  <url><loc>https://your-domain-here.com/sitemap.html</loc><priority>0.3</priority></url>
+  <url><loc>https://your-domain-here.com/privacy-policy.html</loc><priority>0.3</priority></url>
+  <url><loc>https://your-domain-here.com/cookie-consent.html</loc><priority>0.3</priority></url>
+  <url><loc>https://your-domain-here.com/brand-guidelines.html</loc><priority>0.3</priority></url>
+  <url><loc>https://your-domain-here.com/your-rights.html</loc><priority>0.3</priority></url>
+  <url><loc>https://your-domain-here.com/copyrights.html</loc><priority>0.3</priority></url>
+</urlset>

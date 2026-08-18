@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust – Move Intelligently. Live Effortlessly.</title>
+<meta name="description" content="Trust is a professional moving company offering residential, commercial, packing, and long-distance moving services with real-time move tracking and instant online estimates.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://your-domain-here.com/">
+
+<!-- Open Graph (Facebook, WhatsApp, LinkedIn link previews) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Trust">
+<meta property="og:title" content="Trust – Move Intelligently. Live Effortlessly.">
+<meta property="og:description" content="Professional residential, commercial, packing, and long-distance moving services with real-time tracking and instant online estimates.">
+<meta property="og:image" content="https://your-domain-here.com/assets/hero-bg.jpg">
+<meta property="og:url" content="https://your-domain-here.com/">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trust – Move Intelligently. Live Effortlessly.">
+<meta name="twitter:description" content="Professional residential, commercial, packing, and long-distance moving services with real-time tracking and instant online estimates.">
+<meta name="twitter:image" content="https://your-domain-here.com/assets/hero-bg.jpg">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/lucide@0.577.0"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MovingCompany",
+  "name": "Trust",
+  "description": "Professional residential, commercial, packing, and long-distance moving services with real-time move tracking and instant online estimates.",
+  "url": "https://your-domain-here.com/",
+  "logo": "https://your-domain-here.com/assets/logo-icon.png",
+  "sameAs": [
+    "https://www.instagram.com/trustpackingboxesand",
+    "https://www.tiktok.com/@trustmovers1",
+    "https://youtube.com/@packagingboxexandwraps"
+  ]
+}
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #C1121F;
+    --red-dark: #96030F;
+    --red-light: #E63946;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --card: #1A1A1A;
+    --card2: #1F1F1F;
+    --border: #2A2A2A;
+    --text: #FFFFFF;
+    --muted: #888888;
+    --subtle: #555555;
+    --page-pad: clamp(20px, 5vw, 80px);
+    --nav-h: 64px;
+  }
+
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--black);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── ICONS ── */
+  .icon {
+    width: 20px; height: 20px;
+    stroke: var(--red); stroke-width: 2;
+    fill: none; flex-shrink: 0;
+  }
+  .icon-lg { width: 28px; height: 28px; }
+  .icon-xl { width: 40px; height: 40px; stroke-width: 1.5; }
+  .icon-white { stroke: #fff; }
+  .icon-muted { stroke: var(--muted); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 var(--page-pad); height: var(--nav-h);
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 800; letter-spacing: 1px;
+    text-decoration: none; color: var(--text);
+    z-index: 101;
+  }
+
+  .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .nav-logo-sub {
+    font-size: 8px; font-weight: 700; letter-spacing: 2px;
+    color: var(--red); text-transform: uppercase; margin-top: 1px;
+  }
+
+  .logo-mark {
+    height: 32px; width: auto; flex-shrink: 0; display: block;
+  }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    position: relative;
+    display: inline-block;
+    color: var(--muted); text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 0;
+    transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; left: 0; bottom: 0;
+    width: 100%; height: 2px; background: var(--red);
+    transform: scaleX(0); transform-origin: right;
+    transition: transform 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+  .nav-links-auth {
+    display: none;
+    width: 100%; padding-top: 20px; margin-top: 4px;
+    border-top: 1px solid var(--border);
+  }
+  .nav-links-auth a { color: var(--red) !important; font-weight: 700; }
+
+  .nav-actions { display: flex; align-items: center; gap: 12px; z-index: 101; }
+
+  .nav-toggle {
+    display: none;
+    background: none; border: none; color: var(--text);
+    cursor: pointer; padding: 8px; z-index: 101;
+  }
+
+  .btn-login {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border); padding: 9px 22px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-login:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── AUTH MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal-box {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    width: 100%; max-width: 400px;
+    padding: 36px;
+    position: relative;
+    animation: fadeUp 0.3s ease forwards;
+  }
+
+  .modal-close {
+    position: absolute; top: 16px; right: 16px; z-index: 2;
+    background: rgba(10,10,10,0.5); border: none; border-radius: 50%;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    cursor: pointer; padding: 6px; line-height: 0;
+    transition: color 0.2s, background 0.2s;
+  }
+  .modal-close:hover { color: var(--text); }
+
+  /* Article detail modal — wider, scrollable for longer content */
+  .article-modal-box {
+    max-width: 640px;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .article-modal-tag {
+    display: inline-block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--red);
+    margin-bottom: 10px;
+  }
+  .article-modal-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(26px, 4vw, 34px); font-weight: 800;
+    line-height: 1.1; margin-bottom: 20px; padding-right: 24px;
+  }
+  .article-modal-image {
+    display: block; width: calc(100% + 72px); max-width: none;
+    margin: -36px -36px 24px; height: auto;
+    max-height: 320px; object-fit: cover;
+  }
+  .video-embed {
+    position: relative; width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    background: #000; margin-bottom: 24px; overflow: hidden;
+  }
+  .video-embed.video-embed-vertical {
+    max-width: 360px; margin-left: auto; margin-right: auto;
+    padding-top: 177.78%; /* 9:16 — TikTok/vertical video */
+  }
+  .video-embed iframe, .video-embed video {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+  }
+  .video-watch-link {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 12px; color: var(--muted); text-decoration: none;
+    margin-top: -14px; margin-bottom: 20px;
+    transition: color 0.2s;
+  }
+  .video-watch-link:hover { color: var(--red-light); }
+  .article-modal-content {
+    font-size: 15px; line-height: 1.8; color: var(--text);
+    white-space: pre-line;
+  }
+
+  .modal-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px; font-weight: 800; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+  .modal-tabs {
+    display: flex; border: 1px solid var(--border); margin-bottom: 24px;
+  }
+  .modal-tab {
+    flex: 1; background: none; border: none; color: var(--muted);
+    padding: 12px; font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+  }
+  .modal-tab:first-child { border-right: 1px solid var(--border); }
+  .modal-tab.active { background: var(--red); color: #fff; }
+
+  .google-signin-row {
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+    margin-top: 24px; padding-top: 4px;
+  }
+  /* Google renders its own button (an iframe) into this container — we can't
+     restyle its internals, only how it sits in our layout. Its border-radius
+     is set to fully round via the render options below (shape: 'circle'),
+     so this just centers and gives it a little breathing room. */
+  .google-btn-container { display: flex; justify-content: center; }
+  .google-divider {
+    display: flex; align-items: center; gap: 12px; width: 100%;
+    font-size: 11px; color: var(--subtle); letter-spacing: 0.5px;
+  }
+  .google-divider::before, .google-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  .modal-form { display: none; flex-direction: column; gap: 14px; }
+
+  /* Honeypot fields: invisible to real people, but most spam bots fill in
+     every field they find. display:none is skipped by some bots, so this
+     hides it visually/from screen readers without removing it from the DOM. */
+  .hp-field {
+    position: absolute; left: -9999px; top: -9999px;
+    width: 1px; height: 1px; overflow: hidden;
+  }
+  .modal-form.active { display: flex; }
+
+  .modal-msg {
+    font-size: 12px; padding: 10px 12px; display: none; line-height: 1.5;
+  }
+  .modal-msg.error { display: block; background: rgba(193,18,31,0.12); color: var(--red-light); border: 1px solid rgba(193,18,31,0.3); }
+  .modal-msg.success { display: block; background: rgba(34,197,94,0.1); color: #22C55E; border: 1px solid rgba(34,197,94,0.3); }
+
+  .account-panel { display: none; flex-direction: column; gap: 16px; }
+  .account-panel.active { display: flex; }
+  .account-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px; border: 1px solid var(--border);
+  }
+  .account-avatar {
+    width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+    background: var(--red); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px;
+  }
+  .account-name { font-weight: 600; font-size: 14px; }
+  .account-email { font-size: 12px; color: var(--muted); }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--red);
+    padding: 14px 20px; font-size: 13px; max-width: 90vw;
+    z-index: 300; opacity: 0; pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.success { border-left-color: #22C55E; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; position: relative; overflow: hidden;
+    display: flex; align-items: flex-end; padding-bottom: 80px;
+    padding-top: var(--nav-h);
+  }
+
+  /* Full-bleed hero background — the uploaded scene, with layered gradients
+     so the headline stays readable on the left while the image still shows
+     through clearly on the right. Swap the url() below for any image. */
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(100deg, rgba(10,10,10,0.96) 0%, rgba(10,10,10,0.82) 30%, rgba(10,10,10,0.35) 62%, rgba(10,10,10,0.6) 100%),
+      linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.05) 40%),
+      linear-gradient(135deg, rgba(193,18,31,0.14) 0%, transparent 55%),
+      url('/assets/hero-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover, cover, cover, cover;
+    background-position: center, center, center, center 42%;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 var(--page-pad); max-width: 700px;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: 3px;
+    color: var(--red); text-transform: uppercase; margin-bottom: 20px;
+  }
+
+  .hero-headline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(52px, 7vw, 96px);
+    font-weight: 900; line-height: 0.92;
+    text-transform: uppercase; letter-spacing: -1px;
+    margin-bottom: 32px;
+  }
+  .hero-headline em { font-style: normal; color: var(--red); }
+
+  .hero-type {
+    display: flex; align-items: center; gap: 4px;
+    min-height: 1.3em;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(20px, 2.6vw, 30px);
+    font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--red);
+  }
+
+  .hero-type-cursor {
+    font-weight: 300;
+    animation: heroCursorBlink 0.9s step-start infinite;
+  }
+  @keyframes heroCursorBlink { 50% { opacity: 0; } }
+
+  .hero::after {
+    content: '';
+    position: absolute; left: var(--page-pad); bottom: 0;
+    width: 60px; height: 4px; background: var(--red);
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px var(--page-pad); }
+
+  .section-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 48px; gap: 24px;
+  }
+
+  .section-tag {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    color: var(--red); text-transform: uppercase; margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px;
+  }
+
+  .section-subtitle {
+    font-size: 14px; color: var(--muted); max-width: 420px; line-height: 1.6;
+  }
+
+  .link-all {
+    color: var(--muted); font-size: 13px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+    display: flex; align-items: center; gap: 8px; white-space: nowrap;
+    transition: color 0.2s;
+  }
+  .link-all:hover { color: var(--red); }
+
+  /* ── SERVICES ── */
+  .services { background: var(--black); }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  }
+
+  .service-card {
+    background: var(--card);
+    padding: 40px 32px;
+    cursor: pointer; position: relative; overflow: hidden;
+    transition: background 0.3s;
+    border: 1px solid transparent;
+    display: block; text-decoration: none; color: inherit;
+  }
+  .service-card::before {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 3px;
+    background: var(--red); transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  .service-card:hover { background: var(--card2); border-color: var(--border); }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    width: 72px; height: 72px; margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .service-icon svg { width: 60px; height: 60px; }
+
+  .service-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .service-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  .service-hover-detail {
+    margin-top: 20px; padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--red); font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 0.3s, transform 0.3s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .service-card:hover .service-hover-detail { opacity: 1; transform: translateY(0); }
+
+  /* ── QUOTE FORM ── */
+  .quote-section {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .quote-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: start;
+  }
+
+  .quote-form-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800; text-transform: uppercase; margin-bottom: 8px;
+  }
+
+  .quote-form-sub {
+    font-size: 14px; color: var(--muted); margin-bottom: 40px; font-style: italic;
+  }
+
+  .form-row { display: flex; gap: 16px; margin-bottom: 16px; }
+  .form-group { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+
+  .form-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    color: var(--muted); text-transform: uppercase;
+  }
+
+  .form-input, .form-select {
+    background: #111; border: 1px solid var(--border);
+    color: var(--text); padding: 14px 16px;
+    font-family: 'Barlow', sans-serif; font-size: 14px;
+    outline: none; transition: border-color 0.2s;
+    appearance: none; -webkit-appearance: none; width: 100%;
+  }
+  .form-input:focus, .form-select:focus { border-color: var(--red); }
+  .form-input::placeholder { color: var(--subtle); }
+
+  .zip-row { display: flex; align-items: center; gap: 12px; }
+  .zip-vs { font-size: 11px; font-weight: 600; color: var(--subtle); letter-spacing: 1px; }
+
+  .size-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+
+  .size-option {
+    background: #111; border: 1px solid var(--border);
+    padding: 16px 10px; text-align: center; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .size-option:hover, .size-option.active {
+    border-color: var(--red); background: rgba(193,18,31,0.1);
+  }
+
+  .size-icon {
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 6px; min-height: 28px;
+  }
+  .size-label { font-size: 11px; color: var(--muted); }
+
+  .btn-full {
+    width: 100%; background: var(--red); color: white;
+    border: none; padding: 18px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer; margin-top: 24px;
+    transition: background 0.2s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-full:hover { background: var(--red-light); }
+
+  .feature-item {
+    display: flex; align-items: flex-start; gap: 20px;
+    padding: 28px 0; border-bottom: 1px solid var(--border);
+  }
+  .feature-item:last-child { border-bottom: none; }
+
+  .feature-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 48px; font-weight: 900; color: rgba(193,18,31,0.2);
+    line-height: 1; flex-shrink: 0;
+  }
+  .feature-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .feature-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── DASHBOARD ── */
+  .dashboard-section { background: var(--black); }
+
+  .dashboard-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    overflow: hidden;
+  }
+
+  .map-panel {
+    background: #0d1117; min-height: 360px;
+    position: relative; overflow: hidden;
+  }
+
+  .map-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px;
+  }
+
+  .map-title { font-size: 13px; font-weight: 600; }
+  .map-status {
+    font-size: 11px; color: var(--red); font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .map-bg { position: absolute; inset: 0; background: #0d1117; }
+  .map-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .map-route {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .real-map {
+    position: absolute; inset: 0;
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+  .real-map #realMapEl { width: 100%; height: 100%; background: #1a1a1a; }
+  /* Leaflet's default attribution/zoom controls, restyled to fit the dark theme
+     instead of looking like a plain default map widget dropped onto the page. */
+  .real-map .leaflet-control-zoom a {
+    background: var(--dark) !important; color: var(--text) !important;
+    border-color: var(--border) !important;
+  }
+  .real-map .leaflet-control-zoom a:hover { background: var(--card2) !important; }
+  .real-map .leaflet-control-attribution {
+    background: rgba(10,10,10,0.75) !important; color: var(--subtle) !important;
+    font-size: 9px !important; backdrop-filter: blur(4px);
+  }
+  .real-map .leaflet-control-attribution a { color: var(--muted) !important; }
+
+  /* Custom live-location marker — a pulsing red dot instead of Leaflet's
+     default pin icon, matching the same pulse treatment used in the admin
+     panel's GPS status indicator. */
+  .live-marker { position: relative; width: 20px; height: 20px; }
+  .live-marker::before, .live-marker::after {
+    content: ''; position: absolute; inset: 0; border-radius: 50%;
+  }
+  .live-marker::before { background: var(--red); box-shadow: 0 0 0 3px rgba(10,10,10,0.6); }
+  .live-marker::after {
+    background: var(--red); opacity: 0.55;
+    animation: liveMarkerPulse 1.8s ease-out infinite;
+  }
+  @keyframes liveMarkerPulse {
+    0% { transform: scale(1); opacity: 0.55; }
+    100% { transform: scale(2.6); opacity: 0; }
+  }
+
+  .progress-bar {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: var(--card);
+  }
+
+  .progress-label {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px;
+    font-size: 11px; color: var(--muted); margin-bottom: 8px;
+  }
+
+  .progress-track {
+    background: var(--border); height: 3px; border-radius: 2px; overflow: hidden;
+  }
+  .progress-fill { height: 100%; background: var(--red); width: 0; transition: width 1s ease; }
+
+  .chat-panel {
+    display: flex; flex-direction: column;
+    border-left: 1px solid var(--border);
+  }
+
+  .chat-header {
+    padding: 20px 24px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .chat-title { font-size: 13px; font-weight: 600; }
+
+  .chat-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #22C55E; box-shadow: 0 0 8px rgba(34,197,94,0.5);
+  }
+
+  .chat-messages {
+    flex: 1; padding: 20px 24px;
+    display: flex; flex-direction: column; gap: 16px;
+    overflow-y: auto; min-height: 200px;
+  }
+
+  .chat-msg { display: flex; gap: 10px; align-items: flex-start; }
+
+  .chat-avatar {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--red); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+  }
+
+  .chat-bubble {
+    background: #1e1e1e; padding: 10px 14px;
+    font-size: 12px; color: var(--muted); line-height: 1.5; max-width: 80%;
+  }
+  .chat-bubble.mine {
+    background: rgba(193,18,31,0.15);
+    border: 1px solid rgba(193,18,31,0.3);
+    margin-left: auto;
+  }
+
+  .chat-input-row {
+    padding: 16px 24px; border-top: 1px solid var(--border);
+    display: flex; gap: 10px;
+  }
+
+  .chat-input {
+    flex: 1; background: #111; border: 1px solid var(--border);
+    color: var(--text); padding: 10px 14px;
+    font-family: 'Barlow', sans-serif; font-size: 13px; outline: none;
+  }
+  .chat-input::placeholder { color: var(--subtle); }
+
+  .chat-send {
+    background: var(--red); border: none; color: white;
+    width: 40px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .chat-send:hover { background: var(--red-light); }
+
+  /* ── TEAM ── */
+  .team-section { background: var(--dark); }
+
+  .team-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
+
+  .team-card {
+    background: var(--card); padding: 32px 24px;
+    text-align: center; cursor: pointer;
+    transition: background 0.2s; position: relative; overflow: hidden;
+  }
+  .team-card::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--red); transform: scaleX(0); transition: transform 0.3s;
+  }
+  .team-card:hover { background: var(--card2); }
+  .team-card:hover::after { transform: scaleX(1); }
+
+  .team-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--border); margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px; font-weight: 800; color: var(--red);
+    background-size: cover; background-position: center;
+  }
+
+  .team-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;
+  }
+  .team-role { font-size: 11px; color: var(--muted); letter-spacing: 0.5px; }
+
+  .team-status {
+    margin-top: 12px; font-size: 10px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; }
+  .status-text { color: #22C55E; }
+
+  /* ── RESOURCES ── */
+  .resources-section { background: var(--black); }
+  .resources-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+
+  .resource-card {
+    background: var(--card); overflow: hidden; cursor: pointer;
+    transition: background 0.2s; border: 1px solid transparent;
+  }
+  .resource-card:hover { background: var(--card2); border-color: var(--border); }
+
+  .resource-thumb {
+    height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .resource-thumb::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--red);
+  }
+
+  .resource-body { padding: 20px; }
+  .resource-tag {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    color: var(--red); text-transform: uppercase; margin-bottom: 8px;
+  }
+  .resource-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px; font-weight: 700; text-transform: uppercase;
+    line-height: 1.2; margin-bottom: 8px;
+  }
+  .resource-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .resource-card { text-decoration: none; color: inherit; display: block; }
+
+  .resources-status {
+    grid-column: 1 / -1;
+    padding: 48px 20px; text-align: center;
+    color: var(--muted); font-size: 14px;
+    border: 1px dashed var(--border);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    padding: 60px var(--page-pad) 40px;
+  }
+
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px;
+    margin-bottom: 60px;
+  }
+
+  .footer-logo-wrap {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+  }
+
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
+    line-height: 1;
+  }
+  .footer-logo-sub {
+    display: block;
+    font-size: 11px; font-weight: 700; letter-spacing: 4px;
+    color: var(--red); text-transform: uppercase; margin-top: 4px;
+  }
+
+  .footer-tagline {
+    font-size: 13px; color: var(--muted); line-height: 1.7;
+    max-width: 280px; margin-bottom: 28px;
+  }
+
+  .footer-socials { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .social-btn {
+    width: 36px; height: 36px;
+    background: var(--card); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; text-decoration: none; color: var(--muted);
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .social-btn:hover { border-color: var(--red); background: rgba(193,18,31,0.1); color: var(--red); }
+  .social-btn svg { width: 16px; height: 16px; }
+
+  .footer-col-title {
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    color: var(--muted); text-transform: uppercase; margin-bottom: 20px;
+  }
+
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-links a {
+    color: var(--subtle); text-decoration: none; font-size: 13px; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--text); }
+
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 32px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--subtle); gap: 16px; flex-wrap: wrap;
+  }
+
+  .footer-bottom-left {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .footer-credit {
+    padding-left: 8px; border-left: 1px solid var(--border);
+  }
+
+  .footer-bottom-mark {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; font-weight: 900; letter-spacing: 2px; color: var(--subtle);
+  }
+
+  .accent-blob {
+    position: fixed; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(193,18,31,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content { animation: fadeUp 0.8s ease forwards; }
+
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── TABLET ── */
+  @media (max-width: 1024px) {
+    section { padding: 60px var(--page-pad); }
+    footer { padding: 48px var(--page-pad) 32px; }
+
+    .nav-links { gap: 20px; }
+    .nav-links a { font-size: 13px; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .team-grid { grid-template-columns: repeat(3, 1fr); }
+    .resources-grid { grid-template-columns: repeat(2, 1fr); }
+    .quote-layout { grid-template-columns: 1fr; gap: 48px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .section-header { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    :root { --nav-h: 56px; }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      inset: var(--nav-h) 0 0 0;
+      background: var(--black);
+      padding: 24px;
+      gap: 24px;
+      z-index: 99;
+      align-items: flex-start;
+    }
+    .nav-links.mobile-open { display: flex; }
+    .nav-links.mobile-open .nav-links-auth { display: block; }
+    .nav-links a { color: var(--text); }
+    .nav-links a::after { display: none; }
+
+    .nav-toggle { display: flex; }
+    .nav-actions .btn-login { display: none; }
+
+    section { padding: 48px 20px; }
+    footer { padding: 40px 20px 24px; }
+
+    .hero {
+      align-items: center;
+      padding-bottom: 48px;
+      min-height: 85vh;
+    }
+    .hero-content { max-width: 100%; width: 100%; text-align: center; }
+    .hero-type { justify-content: center; }
+    .hero::after { left: 50%; transform: translateX(-50%); }
+    .hero-bg {
+      background:
+        linear-gradient(rgba(10,10,10,0.88), rgba(10,10,10,0.88)),
+        url('/assets/hero-bg.jpg');
+      background-repeat: no-repeat;
+      background-size: cover, cover;
+      background-position: center, center 42%;
+    }
+
+    .services-grid,
+    .resources-grid { grid-template-columns: 1fr; }
+
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .form-row { flex-direction: column; }
+    .size-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .dashboard-card { grid-template-columns: 1fr; }
+    .chat-panel { border-left: none; border-top: 1px solid var(--border); }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+    .footer-bottom-left { justify-content: center; }
+
+    .feature-num { font-size: 36px; }
+  }
+
+  /* ── SMALL PHONE ── */
+  @media (max-width: 480px) {
+    .team-grid { grid-template-columns: 1fr; }
+    .hero-headline { font-size: clamp(40px, 12vw, 52px); }
+    .modal-box { padding: 24px; }
+    .article-modal-image { width: calc(100% + 48px); margin: -24px -24px 20px; max-height: 220px; }
+    .article-modal-title { font-size: clamp(22px, 7vw, 28px); }
+    .size-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .service-card { padding-left: 16px; padding-right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="accent-blob"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img class="logo-mark" src="/assets/logo-icon.png" alt="Trust Movers logo">
+    <span class="nav-logo-text">
+      Trust
+      <span class="nav-logo-sub">Movers</span>
+    </span>
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#quote">Get a Quote</a></li>
+    <li><a href="#dashboard">Track Move</a></li>
+    <li><a href="#team">Our Team</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li class="nav-links-auth"><a href="#" id="authButtonMobile" onclick="openAuthModal(); return false;">Login / Sign Up</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="btn-login" id="authButton" onclick="openAuthModal()">Login / Sign Up</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <i data-lucide="menu"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Professional Moving Services</p>
+    <h1 class="hero-headline">
+      Move<br>Intelligently.<br><em>Live<br>Effortlessly.</em>
+    </h1>
+    <div class="hero-type">
+      <span id="heroType"></span><span class="hero-type-cursor">|</span>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- SERVICES -->
+<section class="services reveal" id="services">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">What We Do</p>
+      <h2 class="section-title">Services</h2>
+      <p class="section-subtitle">Hover each card to see full service details and get tailored options for your move.</p>
+    </div>
+    <a href="#" class="link-all">
+      View All Services
+      <i data-lucide="arrow-right" class="icon icon-muted" style="width:14px;height:14px"></i>
+    </a>
+  </div>
+  <div class="services-grid">
+    <a class="service-card" href="/residential.html">
+      <div class="service-icon">
+        <svg viewBox="0 0 80 80" fill="none">
+          <rect x="10" y="30" width="50" height="40" rx="2" fill="#C1121F" opacity="0.15"/>
+          <rect x="15" y="25" width="40" height="45" rx="2" fill="#C1121F" opacity="0.3"/>
+          <rect x="20" y="20" width="30" height="50" rx="2" fill="#C1121F" opacity="0.6"/>
+          <rect x="30" y="50" width="10" height="20" fill="#C1121F"/>
+          <rect x="22" y="32" width="8" height="8" fill="#fff" opacity="0.3"/>
+          <rect x="38" y="32" width="8" height="8" fill="#fff" opacity="0.3"/>
+        </svg>
+      </div>
+      <h3 class="service-name">Residential</h3>
+      <p class="service-desc">Full-service home moving with white-glove care for every item.</p>
+      <div class="service-hover-detail">Learn More <i data-lucide="arrow-right" style="width:14px;height:14px;stroke:var(--red)"></i></div>
+    </a>
+    <a class="service-card" href="/commercial.html">
+      <div class="service-icon">
+        <svg viewBox="0 0 80 80" fill="none">
+          <rect x="8" y="20" width="55" height="50" rx="2" fill="#C1121F" opacity="0.15"/>
+          <rect x="12" y="15" width="50" height="55" rx="2" fill="#C1121F" opacity="0.3"/>
+          <rect x="16" y="10" width="44" height="60" rx="2" fill="#C1121F" opacity="0.5"/>
+          <rect x="20" y="16" width="8" height="8" fill="#fff" opacity="0.3"/>
+          <rect x="34" y="16" width="8" height="8" fill="#fff" opacity="0.3"/>
+          <rect x="48" y="16" width="8" height="8" fill="#fff" opacity="0.3"/>
+          <rect x="20" y="30" width="8" height="8" fill="#fff" opacity="0.3"/>
+          <rect x="34" y="30" width="8" height="8" fill="#fff" opacity="0.3"/>
+          <rect x="28" y="50" width="16" height="20" fill="#C1121F"/>
+        </svg>
+      </div>
+      <h3 class="service-name">Commercial</h3>
+      <p class="service-desc">Office building and business relocation with minimal downtime.</p>
+      <div class="service-hover-detail">Learn More <i data-lucide="arrow-right" style="width:14px;height:14px;stroke:var(--red)"></i></div>
+    </a>
+    <a class="service-card" href="/packing.html">
+      <div class="service-icon">
+        <svg viewBox="0 0 80 80" fill="none">
+          <rect x="15" y="25" width="20" height="20" rx="2" fill="#C1121F" opacity="0.8"/>
+          <rect x="40" y="15" width="20" height="20" rx="2" fill="#C1121F" opacity="0.6"/>
+          <rect x="18" y="50" width="18" height="18" rx="2" fill="#C1121F" opacity="0.5"/>
+          <rect x="42" y="40" width="18" height="18" rx="2" fill="#C1121F" opacity="0.4"/>
+          <line x1="25" y1="25" x2="40" y2="20" stroke="#C1121F" stroke-width="1" opacity="0.4"/>
+        </svg>
+      </div>
+      <h3 class="service-name">Packing</h3>
+      <p class="service-desc">Premium packing materials and expert technique for fragile items.</p>
+      <div class="service-hover-detail">Learn More <i data-lucide="arrow-right" style="width:14px;height:14px;stroke:var(--red)"></i></div>
+    </a>
+    <a class="service-card" href="/long-distance.html">
+      <div class="service-icon">
+        <svg viewBox="0 0 80 80" fill="none">
+          <circle cx="16" cy="20" r="8" fill="#C1121F" opacity="0.2"/>
+          <circle cx="16" cy="20" r="3.5" fill="#C1121F"/>
+          <path d="M16 28c-6 17 14 12 24 12 15 0 22-5 24 18" stroke="#C1121F" stroke-width="2.5" stroke-dasharray="6,5" opacity="0.5"/>
+          <path d="M64 52c-5 0-9 4-9 9 0 6.75 9 15 9 15s9-8.25 9-15c0-5-4-9-9-9z" fill="#C1121F" opacity="0.35"/>
+          <circle cx="64" cy="61" r="3.5" fill="#fff"/>
+        </svg>
+      </div>
+      <h3 class="service-name">Long-Distance</h3>
+      <p class="service-desc">Interstate and cross-country moves planned and tracked door to door.</p>
+      <div class="service-hover-detail">Learn More <i data-lucide="arrow-right" style="width:14px;height:14px;stroke:var(--red)"></i></div>
+    </a>
+  </div>
+</section>
+
+<!-- QUOTE FORM -->
+<section class="quote-section reveal" id="quote">
+  <div class="quote-layout">
+    <div>
+      <p class="section-tag">Smart Estimate</p>
+      <h2 class="quote-form-title">Quote Form</h2>
+      <p class="quote-form-sub">Elegant single-screen interactions. Instant, accurate estimate.</p>
+
+      <div class="form-group hp-field" aria-hidden="true">
+        <label>Company Website</label>
+        <input type="text" id="qWebsite" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" type="text" id="qName" placeholder="Jane Doe">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" id="qEmail" placeholder="jane@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input class="form-input" type="tel" id="qPhone" placeholder="+256754843643">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group" style="flex:2">
+          <label class="form-label">Step 1: Where?</label>
+          <div class="zip-row">
+            <input class="form-input" type="text" id="qFromZip" placeholder="From">
+            <span class="zip-vs"><i data-lucide="arrow-right" class="icon icon-muted" style="width:14px;height:14px"></i></span>
+            <input class="form-input" type="text" id="qToZip" placeholder="To">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date</label>
+          <input class="form-input" type="date" id="qDate">
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:16px">
+        <label class="form-label">Step 2: How Big?</label>
+        <div class="size-grid">
+          <div class="size-option active" onclick="selectSize(this)" data-size="Studio">
+            <div class="size-icon"><i data-lucide="building-2" class="icon icon-lg"></i></div>
+            <div class="size-label">Studio</div>
+          </div>
+          <div class="size-option" onclick="selectSize(this)" data-size="2 Bed">
+            <div class="size-icon"><i data-lucide="bed-double" class="icon icon-lg"></i></div>
+            <div class="size-label">2 Bed</div>
+          </div>
+          <div class="size-option" onclick="selectSize(this)" data-size="3 Bed">
+            <div class="size-icon" style="gap:4px">
+              <i data-lucide="bed" class="icon icon-lg"></i>
+              <i data-lucide="bed" class="icon icon-lg"></i>
+            </div>
+            <div class="size-label">3 Bed</div>
+          </div>
+          <div class="size-option" onclick="selectSize(this)" data-size="4+ Bed">
+            <div class="size-icon"><i data-lucide="house" class="icon icon-lg"></i></div>
+            <div class="size-label">4+ Bed</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Special Items</label>
+          <select class="form-select" id="qSpecialItems">
+            <option value="">None</option>
+            <option>Piano</option>
+            <option>Safe / Vault</option>
+            <option>Artwork</option>
+            <option>Gym Equipment</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Service Type</label>
+          <select class="form-select" id="qServiceType">
+            <option>Full Service</option>
+            <option>Labor Only</option>
+            <option>Packing Only</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn-full" id="qSubmitBtn" onclick="submitFullQuote()">
+        Get My Free Estimate
+        <i data-lucide="arrow-right" class="icon icon-white" style="width:18px;height:18px"></i>
+      </button>
+    </div>
+
+    <div class="quote-features">
+      <p class="section-tag">Why Trust</p>
+      <h2 class="quote-form-title" style="margin-bottom:36px">The Difference</h2>
+      <div class="feature-item">
+        <div class="feature-num">01</div>
+        <div>
+          <h3 class="feature-title">Real-Time Tracking</h3>
+          <p class="feature-desc">GPS live view of your shipment with instant driver chat built into your dashboard.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">02</div>
+        <div>
+          <h3 class="feature-title">Guaranteed Pricing</h3>
+          <p class="feature-desc">Your estimate is your price. No hidden fees, no surprise charges on move day.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">03</div>
+        <div>
+          <h3 class="feature-title">Certified Crew</h3>
+          <p class="feature-desc">Every mover is background-checked, insured, and trained in furniture protection.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">04</div>
+        <div>
+          <h3 class="feature-title">Claims-Free Promise</h3>
+          <p class="feature-desc">If anything is damaged, we replace it. No paperwork marathons, no waiting.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="dashboard-section reveal" id="dashboard">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">Live Tracking</p>
+      <h2 class="section-title">My Move Dashboard</h2>
+      <p class="section-subtitle">Real-time move and route tracking with direct crew communication.</p>
+    </div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="map-panel">
+      <div class="map-header">
+        <span class="map-title" id="mapTitleText">In Transit — 30% Complete</span>
+        <span class="map-status"><span class="chat-dot"></span> Live</span>
+      </div>
+      <div class="map-bg"></div>
+      <div class="map-grid"></div>
+      <div class="map-route" id="illustratedRoute">
+        <svg width="90%" height="240" viewBox="0 0 500 240">
+          <line x1="0" y1="120" x2="500" y2="120" stroke="#1e2a3a" stroke-width="8"/>
+          <line x1="200" y1="0" x2="200" y2="240" stroke="#1e2a3a" stroke-width="5"/>
+          <line x1="350" y1="0" x2="350" y2="240" stroke="#1e2a3a" stroke-width="5"/>
+          <line x1="0" y1="60" x2="500" y2="60" stroke="#1e2a3a" stroke-width="3"/>
+          <line x1="0" y1="180" x2="500" y2="180" stroke="#1e2a3a" stroke-width="3"/>
+          <path id="routeFull" d="M 50 180 Q 120 180 200 120 Q 280 60 350 80 Q 420 100 460 60" stroke="#C1121F" stroke-width="3" fill="none" stroke-dasharray="8,4" opacity="0.6"/>
+          <path id="routeProgress" d="M 50 180 Q 120 180 200 120 Q 280 60 350 80 Q 420 100 460 60" stroke="#C1121F" stroke-width="3" fill="none"/>
+          <circle cx="50" cy="180" r="10" fill="#C1121F" opacity="0.4"/>
+          <circle cx="50" cy="180" r="6" fill="#C1121F"/>
+          <g id="truckMarker">
+            <rect x="-12" y="-8" width="24" height="16" rx="2" fill="#C1121F"/>
+            <circle cx="-6" cy="8" r="4" fill="#888"/>
+            <circle cx="6" cy="8" r="4" fill="#888"/>
+          </g>
+          <circle cx="460" cy="60" r="10" fill="rgba(193,18,31,0.3)" stroke="#C1121F" stroke-width="2"/>
+          <line x1="460" y1="50" x2="460" y2="30" stroke="#C1121F" stroke-width="2"/>
+          <circle cx="460" cy="28" r="4" fill="#C1121F"/>
+          <text x="50" y="200" fill="#888" font-size="9" text-anchor="middle">Origin</text>
+          <text x="460" y="48" fill="#888" font-size="9" text-anchor="middle">Destination</text>
+        </svg>
+      </div>
+      <!-- Shown instead of the illustration above whenever a real GPS position has
+           been shared from the admin panel — a real interactive dark map with a
+           live-updating marker, not a stylized route or a reloading iframe. -->
+      <div class="real-map" id="realMap" style="display:none">
+        <div id="realMapEl"></div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-label">
+          <span id="progressLabelText">W Fleet St — 30% Complete</span>
+          <span style="color:var(--red)" id="progressEtaText">ETA: 2h 15m</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+      </div>
+    </div>
+    <div class="chat-panel">
+      <div class="chat-header">
+        <span class="chat-title">Chat with Crew</span>
+        <span class="chat-dot"></span>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg">
+          <div class="chat-avatar">T</div>
+          <div class="chat-bubble">Hi! 👋 How can we help with your move? Send us a message and we'll get back to you on WhatsApp.</div>
+        </div>
+      </div>
+      <div class="hp-field" aria-hidden="true">
+        <label>Company Website</label>
+        <input type="text" id="chatWebsite" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="chat-input-row">
+        <input class="chat-input" type="text" id="chatInput" placeholder="Type a message…">
+        <button class="chat-send" id="chatSend"><i data-lucide="send" class="icon icon-white" style="width:16px;height:16px"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section reveal" id="team">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">The Crew</p>
+      <h2 class="section-title">Meet the Team</h2>
+      <p class="section-subtitle">Professionally certified movers. Active online and ready.</p>
+    </div>
+    <a href="#" class="link-all">
+      Full Roster
+      <i data-lucide="arrow-right" class="icon icon-muted" style="width:14px;height:14px"></i>
+    </a>
+  </div>
+  <div class="team-grid" id="teamGrid">
+    <p class="resources-status">Loading team…</p>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section class="resources-section reveal" id="resources">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">Learn & Prepare</p>
+      <h2 class="section-title">Resources</h2>
+      <p class="section-subtitle">Helpful articles and guides from our team, updated regularly.</p>
+    </div>
+    <a href="#resources" class="link-all">
+      Browse All
+      <i data-lucide="arrow-right" class="icon icon-muted" style="width:14px;height:14px"></i>
+    </a>
+  </div>
+  <!-- Articles are fetched from the backend at /api/articles (see loadArticles()
+       near the bottom of this file). The admin adds, edits, and publishes these
+       from /admin.html — there is nothing hard-coded here anymore. -->
+  <div class="resources-grid" id="resourcesGrid">
+    <p class="resources-status">Loading articles…</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <img class="logo-mark" src="/assets/logo-icon.png" alt="Trust logo" style="height:32px">
+        <div class="footer-logo">Trust<span class="footer-logo-sub">Movers</span></div>
+      </div>
+      <p class="footer-tagline">Intelligent moving technology and certified crews working together to make your move effortless.</p>
+      <!-- Replace the href="#" below with your real profile URLs when ready. -->
+      <div class="footer-socials">
+        <a class="social-btn" href="https://www.instagram.com/trustpackingboxesand" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.tiktok.com/@trustmovers1" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-1.36-1.03-2.06-2.44-2.06-4.02v-.3h-3.19v13.9a2.6 2.6 0 0 1-2.6 2.5c-1.43 0-2.6-1.16-2.6-2.6 0-1.72 1.67-3.01 3.38-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.31 1.38V7.3c-.87 0-1.72-.26-2.15-.55-.01-.15-.01-.28 0-.93Z"/></svg>
+        </a>
+        <a class="social-btn" href="https://youtube.com/@packagingboxexandwraps" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.51 3.5 12 3.5 12 3.5s-7.51 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.49 20.5 12 20.5 12 20.5s7.51 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81ZM9.6 15.6V8.4L15.8 12Z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Legal</div>
+      <ul class="footer-links">
+        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="/cookie-consent.html">Cookie Consent</a></li>
+        <li><a href="/brand-guidelines.html">Brand Guidelines</a></li>
+        <li><a href="/your-rights.html">Your Rights</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="/sitemap.html">Sitemap</a></li>
+        <li><a href="/copyrights.html">Copyrights</a></li>
+        <li><a href="/brand.html">Brand</a></li>
+        <li><a href="/careers.html">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">
+      <span>© 2026 Trust. All rights reserved.</span>
+      <span class="footer-credit">Built &amp; Maintained by Mazima Glaynes</span>
+    </div>
+    <div class="footer-bottom-mark">
+      <img src="/assets/logo-icon.png" alt="" aria-hidden="true" style="height:22px;filter:grayscale(1) brightness(1.6);opacity:0.6">
+      TRUST
+    </div>
+  </div>
+</footer>
+
+<!-- AUTH MODAL: single entry point for both Login and Create Account -->
+<div class="modal-overlay" id="authModalOverlay" onclick="if(event.target===this) closeAuthModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAuthModal()" aria-label="Close">
+      <i data-lucide="x" class="icon icon-muted"></i>
+    </button>
+
+    <!-- Logged OUT view: tabs + forms -->
+    <div id="authLoggedOut">
+      <h2 class="modal-title">Welcome</h2>
+      <p class="modal-sub">Log in to your account, or create one to track your move.</p>
+
+      <div class="modal-tabs">
+        <button class="modal-tab active" id="tabLogin" onclick="switchAuthTab('login')">Login</button>
+        <button class="modal-tab" id="tabRegister" onclick="switchAuthTab('register')">Create Account</button>
+      </div>
+
+      <p class="modal-msg" id="authMsg"></p>
+
+      <form class="modal-form active" id="loginForm" onsubmit="return handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" id="loginEmail" required placeholder="jane@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" id="loginPassword" required placeholder="••••••••">
+        </div>
+        <button class="btn-full" type="submit" id="loginSubmitBtn" style="margin-top:8px">Log In</button>
+        <button type="button" onclick="showForgotPassword()" style="background:none;border:none;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer;margin-top:4px">Forgot password?</button>
+      </form>
+
+      <form class="modal-form" id="forgotForm" onsubmit="return handleForgotPassword(event)">
+        <p style="font-size:13px;color:var(--muted);margin-bottom:4px">Enter your email and we'll send you a reset link.</p>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" id="forgotEmail" required placeholder="jane@email.com">
+        </div>
+        <button class="btn-full" type="submit" id="forgotSubmitBtn">Send Reset Link</button>
+        <button type="button" onclick="switchAuthTab('login')" style="background:none;border:none;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer">Back to log in</button>
+      </form>
+
+      <form class="modal-form" id="registerForm" onsubmit="return handleRegister(event)">
+        <div class="form-group hp-field" aria-hidden="true">
+          <label>Company Website</label>
+          <input type="text" id="registerWebsite" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" type="text" id="registerName" required placeholder="Jane Doe">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" id="registerEmail" required placeholder="jane@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" id="registerPassword" required placeholder="At least 8 characters" minlength="8">
+        </div>
+        <button class="btn-full" type="submit" id="registerSubmitBtn" style="margin-top:8px">Create Account</button>
+      </form>
+
+      <!-- Google's own rendered button, not a hand-built one — a custom button
+           firing google.accounts.id.prompt() looked right but was unreliable
+           in practice (that flow is explicitly a secondary/best-effort path in
+           Google's own docs, not meant to be the sole trigger). This container
+           gets Google's actual button rendered into it, which handles the
+           click and popup itself and is the officially reliable mechanism. -->
+      <div class="google-signin-row" id="googleSignInRow" style="display:none">
+        <div class="google-divider"><span>or continue with</span></div>
+        <div id="googleButtonContainer" class="google-btn-container"></div>
+      </div>
+    </div>
+
+    <!-- Logged IN view -->
+    <div class="account-panel" id="authLoggedIn">
+      <h2 class="modal-title">My Account</h2>
+      <div class="account-row">
+        <div class="account-avatar" id="accountAvatar">?</div>
+        <div>
+          <div class="account-name" id="accountName">—</div>
+          <div class="account-email" id="accountEmail">—</div>
+        </div>
+      </div>
+      <button class="btn-login" onclick="logout()" style="width:100%">Log Out</button>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE DETAIL MODAL -->
+<div class="modal-overlay" id="articleModalOverlay" onclick="if(event.target===this) closeArticleModal()">
+  <div class="modal-box article-modal-box">
+    <button class="modal-close" onclick="closeArticleModal()" aria-label="Close">
+      <i data-lucide="x" class="icon icon-muted"></i>
+    </button>
+    <div id="articleModalBody">
+      <p class="modal-sub">Loading…</p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  lucide.createIcons();
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  function selectSize(el) {
+    document.querySelectorAll('.size-option').forEach(o => o.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  navToggle && navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('mobile-open');
+    navToggle.setAttribute('aria-expanded', open);
+    navToggle.innerHTML = open
+      ? '<i data-lucide="x"></i>'
+      : '<i data-lucide="menu"></i>';
+    lucide.createIcons();
+  });
+
+  navLinks && navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('mobile-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.innerHTML = '<i data-lucide="menu"></i>';
+      lucide.createIcons();
+    });
+  });
+
+  /* ────────────────────────────────────────────────────────────────
+     BACKEND INTEGRATION
+     Everything below talks to the Express API in /server. Swap
+     API_BASE if the API is ever hosted on a different origin than
+     the site itself.
+  ──────────────────────────────────────────────────────────────── */
+  const API_BASE = window.location.origin;
+  const TOKEN_KEY = 'tm_token';
+  const USER_KEY = 'tm_user';
+
+  function getToken() { return localStorage.getItem(TOKEN_KEY); }
+  function getStoredUser() {
+    try { return JSON.parse(localStorage.getItem(USER_KEY) || 'null'); }
+    catch { return null; }
+  }
+  function setSession(token, user) {
+    localStorage.setItem(TOKEN_KEY, token);
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+  }
+  function clearSession() {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+  }
+
+  async function api(path, options = {}) {
+    const token = getToken();
+    const res = await fetch(`${API_BASE}${path}`, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(options.headers || {}),
+      },
+    });
+    let data = null;
+    try { data = await res.json(); } catch { /* no body */ }
+    if (!res.ok) {
+      throw new Error((data && data.error) || 'Something went wrong. Please try again.');
+    }
+    return data;
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
+
+  // ── Toast ──────────────────────────────────────────────────────
+  let toastTimer = null;
+  function showToast(message, type = 'default') {
+    const el = document.getElementById('toast');
+    if (!el) return;
+    el.textContent = message;
+    el.className = `toast show${type === 'success' ? ' success' : ''}`;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { el.className = 'toast'; }, 4000);
+  }
+
+  // ── Auth modal ─────────────────────────────────────────────────
+  function openAuthModal() {
+    document.getElementById('authModalOverlay').classList.add('open');
+    document.getElementById('authMsg').className = 'modal-msg';
+    refreshAuthUI();
+  }
+  function closeAuthModal() {
+    document.getElementById('authModalOverlay').classList.remove('open');
+  }
+  function switchAuthTab(tab) {
+    const isLogin = tab === 'login';
+    document.getElementById('tabLogin').classList.toggle('active', isLogin);
+    document.getElementById('tabRegister').classList.toggle('active', !isLogin);
+    document.getElementById('loginForm').classList.toggle('active', isLogin);
+    document.getElementById('registerForm').classList.toggle('active', !isLogin);
+    document.getElementById('forgotForm').classList.remove('active');
+    document.getElementById('authMsg').className = 'modal-msg';
+  }
+
+  function showForgotPassword() {
+    document.getElementById('loginForm').classList.remove('active');
+    document.getElementById('registerForm').classList.remove('active');
+    document.getElementById('forgotForm').classList.add('active');
+    document.getElementById('authMsg').className = 'modal-msg';
+  }
+
+  async function handleForgotPassword(event) {
+    event.preventDefault();
+    const btn = document.getElementById('forgotSubmitBtn');
+    const email = document.getElementById('forgotEmail').value.trim();
+    btn.disabled = true; btn.textContent = 'Sending…';
+    try {
+      const data = await api('/api/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) });
+      showAuthMsg(data.message, 'success');
+    } catch (err) {
+      showAuthMsg(err.message, 'error');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Send Reset Link';
+    }
+    return false;
+  }
+
+  function showAuthMsg(message, type) {
+    const el = document.getElementById('authMsg');
+    el.textContent = message;
+    el.className = `modal-msg ${type}`;
+  }
+
+  async function handleLogin(event) {
+    event.preventDefault();
+    const btn = document.getElementById('loginSubmitBtn');
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    btn.disabled = true; btn.textContent = 'Logging in…';
+    try {
+      const data = await api('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
+      setSession(data.token, data.user);
+      showToast(`Welcome back, ${data.user.name.split(' ')[0]}!`, 'success');
+      closeAuthModal();
+      refreshAuthUI();
+    } catch (err) {
+      showAuthMsg(err.message, 'error');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Log In';
+    }
+    return false;
+  }
+
+  async function handleRegister(event) {
+    event.preventDefault();
+    const btn = document.getElementById('registerSubmitBtn');
+    const name = document.getElementById('registerName').value.trim();
+    const email = document.getElementById('registerEmail').value.trim();
+    const password = document.getElementById('registerPassword').value;
+    const website = document.getElementById('registerWebsite').value; // honeypot — real users never fill this
+    btn.disabled = true; btn.textContent = 'Creating account…';
+    try {
+      const data = await api('/api/auth/register', { method: 'POST', body: JSON.stringify({ name, email, password, website }) });
+      setSession(data.token, data.user);
+      showToast(`Welcome to Trust, ${data.user.name.split(' ')[0]}!`, 'success');
+      closeAuthModal();
+      refreshAuthUI();
+    } catch (err) {
+      showAuthMsg(err.message, 'error');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Create Account';
+    }
+    return false;
+  }
+
+  function logout() {
+    clearSession();
+    refreshAuthUI();
+    closeAuthModal();
+    showToast("You've been logged out.");
+  }
+
+  function initials(name) {
+    return (name || '?').trim().split(/\s+/).slice(0, 2).map(p => p[0].toUpperCase()).join('');
+  }
+
+  async function refreshAuthUI() {
+    const desktopBtn = document.getElementById('authButton');
+    const mobileBtn = document.getElementById('authButtonMobile');
+    let user = getStoredUser();
+
+    // Validate any saved token against the server in the background.
+    if (user && getToken()) {
+      try {
+        const data = await api('/api/auth/me');
+        user = data.user;
+        localStorage.setItem(USER_KEY, JSON.stringify(user));
+      } catch {
+        clearSession();
+        user = null;
+      }
+    }
+
+    const loggedOutView = document.getElementById('authLoggedOut');
+    const loggedInView = document.getElementById('authLoggedIn');
+
+    if (user) {
+      const label = user.name.split(' ')[0];
+      desktopBtn.textContent = label;
+      if (mobileBtn) mobileBtn.textContent = label;
+      loggedOutView.style.display = 'none';
+      loggedInView.classList.add('active');
+      document.getElementById('accountAvatar').textContent = initials(user.name);
+      document.getElementById('accountName').textContent = user.name;
+      document.getElementById('accountEmail').textContent = user.email;
+    } else {
+      desktopBtn.textContent = 'Login / Sign Up';
+      if (mobileBtn) mobileBtn.textContent = 'Login / Sign Up';
+      loggedOutView.style.display = 'block';
+      loggedInView.classList.remove('active');
+    }
+  }
+
+  // ── Resources: load articles posted by the admin ────────────────
+  const RESOURCE_ICONS = {
+    package: '<path d="M16.5 9.4 7.5 4.21"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
+    'clipboard-list': '<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/>',
+    tag: '<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42Z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
+    'key-round': '<path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5"/>',
+    truck: '<path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>',
+    box: '<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="M3.3 7 12 12l8.7-5"/><path d="M12 22V12"/>',
+  };
+
+  function renderArticleCard(article) {
+    const iconPath = RESOURCE_ICONS[article.icon] || RESOURCE_ICONS.package;
+    const thumb = article.imageUrl
+      ? `<div class="resource-thumb" style="background-image:url('${escapeHtml(article.imageUrl)}');background-size:cover;background-position:center"></div>`
+      : `<div class="resource-thumb" style="background:linear-gradient(135deg,${escapeHtml(article.gradientFrom)},${escapeHtml(article.gradientTo)})">
+          <svg class="icon-xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${iconPath}</svg>
+        </div>`;
+    return `
+      <a class="resource-card" href="#" onclick="openArticleModal('${escapeHtml(article.id)}'); return false;">
+        ${thumb}
+        <div class="resource-body">
+          <div class="resource-tag">${escapeHtml(article.tag)}</div>
+          <h3 class="resource-title">${escapeHtml(article.title)}</h3>
+          <p class="resource-desc">${escapeHtml(article.excerpt)}</p>
+        </div>
+      </a>`;
+  }
+
+  async function loadArticles() {
+    const grid = document.getElementById('resourcesGrid');
+    if (!grid) return;
+    try {
+      const data = await api('/api/articles');
+      if (!data.articles || data.articles.length === 0) {
+        grid.innerHTML = '<p class="resources-status">No articles yet — check back soon.</p>';
+        return;
+      }
+      grid.innerHTML = data.articles.map(renderArticleCard).join('');
+    } catch (err) {
+      grid.innerHTML = '<p class="resources-status">We couldn\'t load articles right now. Please check back soon.</p>';
+    }
+  }
+
+  // ── Article detail modal (supports an optional embedded video) ────
+  function buildVideoEmbed(rawUrl) {
+    if (!rawUrl) return '';
+    let url;
+    try { url = new URL(rawUrl); } catch { return ''; }
+
+    const host = url.hostname.replace(/^www\.|^m\./, '');
+    const watchLink = (label) => `<a href="${escapeHtml(rawUrl)}" target="_blank" rel="noopener" class="video-watch-link">Trouble watching? Open on ${label} <i data-lucide="arrow-up-right" style="width:13px;height:13px"></i></a>`;
+
+    // YouTube — handles watch links, Shorts, and already-embed links.
+    if (host === 'youtube.com') {
+      let id = url.searchParams.get('v');
+      if (!id) {
+        const m = url.pathname.match(/\/(?:shorts|embed|live)\/([\w-]{6,})/);
+        if (m) id = m[1];
+      }
+      if (id) return youtubeEmbed(id) + watchLink('YouTube');
+    }
+    // youtu.be short-link — id is the whole path, ignore any ?si= share param.
+    if (host === 'youtu.be') {
+      const id = url.pathname.split('/').filter(Boolean)[0];
+      if (id) return youtubeEmbed(id) + watchLink('YouTube');
+    }
+
+    // TikTok — https://www.tiktok.com/@user/video/1234567890123456789
+    // Uses TikTok's own documented embed player (developers.tiktok.com/doc/embed-player) —
+    // an earlier version of this pointed at /embed/v2/, which isn't TikTok's real endpoint
+    // and doesn't reliably render.
+    if (host === 'tiktok.com') {
+      const m = url.pathname.match(/\/video\/(\d+)/);
+      if (m) {
+        return `<div class="video-embed video-embed-vertical"><iframe src="https://www.tiktok.com/player/v1/${m[1]}?music_info=1&description=1" allow="fullscreen; encrypted-media; autoplay" allowfullscreen></iframe></div>` + watchLink('TikTok');
+      }
+    }
+
+    // Vimeo — https://vimeo.com/123456789
+    if (host === 'vimeo.com') {
+      const id = url.pathname.split('/').filter(Boolean)[0];
+      if (id && /^\d+$/.test(id)) {
+        return `<div class="video-embed"><iframe src="https://player.vimeo.com/video/${id}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` + watchLink('Vimeo');
+      }
+    }
+
+    // Fall back to a direct video file (mp4/webm/etc.)
+    return `<div class="video-embed"><video src="${escapeHtml(rawUrl)}" controls></video></div>` + watchLink('the original source');
+  }
+
+  function youtubeEmbed(id) {
+    return `<div class="video-embed"><iframe src="https://www.youtube.com/embed/${id}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+  }
+
+  async function openArticleModal(id) {
+    const overlay = document.getElementById('articleModalOverlay');
+    const body = document.getElementById('articleModalBody');
+    body.innerHTML = '<p class="modal-sub">Loading…</p>';
+    overlay.classList.add('open');
+
+    try {
+      const data = await api(`/api/articles/${id}`);
+      const a = data.article;
+      const imageBanner = a.imageUrl
+        ? `<img class="article-modal-image" src="${escapeHtml(a.imageUrl)}" alt="">`
+        : '';
+      body.innerHTML = `
+        ${imageBanner}
+        <div class="article-modal-tag">${escapeHtml(a.tag)}</div>
+        <h2 class="article-modal-title">${escapeHtml(a.title)}</h2>
+        ${buildVideoEmbed(a.videoUrl)}
+        <div class="article-modal-content">${escapeHtml(a.content || a.excerpt)}</div>`;
+      lucide.createIcons();
+    } catch (err) {
+      body.innerHTML = `<p class="modal-sub">Couldn't load this article. ${escapeHtml(err.message)}</p>`;
+    }
+  }
+
+  function closeArticleModal() {
+    document.getElementById('articleModalOverlay').classList.remove('open');
+    document.getElementById('articleModalBody').innerHTML = '<p class="modal-sub">Loading…</p>';
+  }
+
+  // ── Quote submission ─────────────────────────────────────────────
+  async function submitFullQuote() {
+    const btn = document.getElementById('qSubmitBtn');
+    const activeSize = document.querySelector('.size-option.active');
+    const payload = {
+      name: document.getElementById('qName').value.trim(),
+      email: document.getElementById('qEmail').value.trim(),
+      phone: document.getElementById('qPhone').value.trim(),
+      fromZip: document.getElementById('qFromZip').value.trim(),
+      toZip: document.getElementById('qToZip').value.trim(),
+      date: document.getElementById('qDate').value,
+      homeSize: activeSize ? activeSize.dataset.size : '',
+      specialItems: document.getElementById('qSpecialItems').value,
+      serviceType: document.getElementById('qServiceType').value,
+      source: 'quote-section',
+      website: document.getElementById('qWebsite').value, // honeypot — real users never fill this
+    };
+
+    if (!payload.fromZip || !payload.toZip) {
+      showToast('Please enter both a from and to location.');
+      return;
+    }
+
+    const originalHtml = btn.innerHTML;
+    btn.disabled = true; btn.textContent = 'Sending…';
+    try {
+      const data = await api('/api/quotes', { method: 'POST', body: JSON.stringify(payload) });
+      showToast(data.message || "Thanks! We'll be in touch shortly.", 'success');
+      ['qName','qEmail','qPhone','qFromZip','qToZip','qDate'].forEach(id => document.getElementById(id).value = '');
+    } catch (err) {
+      showToast(err.message);
+    } finally {
+      btn.disabled = false; btn.innerHTML = originalHtml;
+    }
+  }
+
+  // ── Hero typewriter: cycles through what we move ──────────────────
+  const HERO_PHRASES = ['Home Moving', 'Office Moving', 'Cargo Moving'];
+  let heroPhraseIdx = 0, heroCharIdx = 0, heroDeleting = false;
+
+  function tickHeroType() {
+    const el = document.getElementById('heroType');
+    if (!el) return; // section not on this page
+    const phrase = HERO_PHRASES[heroPhraseIdx];
+
+    if (!heroDeleting) {
+      heroCharIdx++;
+      el.textContent = phrase.slice(0, heroCharIdx);
+      if (heroCharIdx === phrase.length) {
+        heroDeleting = true;
+        setTimeout(tickHeroType, 1400); // pause on full phrase
+        return;
+      }
+    } else {
+      heroCharIdx--;
+      el.textContent = phrase.slice(0, heroCharIdx);
+      if (heroCharIdx === 0) {
+        heroDeleting = false;
+        heroPhraseIdx = (heroPhraseIdx + 1) % HERO_PHRASES.length;
+        setTimeout(tickHeroType, 300); // brief pause before next word
+        return;
+      }
+    }
+    setTimeout(tickHeroType, heroDeleting ? 45 : 90);
+  }
+
+  // ── Team: load team members posted by the admin ──────────────────
+  function renderTeamCard(member) {
+    const avatarStyle = member.photoUrl
+      ? ` style="background-image:url('${escapeHtml(member.photoUrl)}')"`
+      : '';
+    return `
+      <div class="team-card">
+        <div class="team-avatar"${avatarStyle}>${member.photoUrl ? '' : escapeHtml(member.initials || '?')}</div>
+        <div class="team-name">${escapeHtml(member.name)}</div>
+        <div class="team-role">${escapeHtml(member.role)}</div>
+        <div class="team-status"><span class="status-dot"></span><span class="status-text">Online / Ready</span></div>
+      </div>`;
+  }
+
+  async function loadTeam() {
+    const grid = document.getElementById('teamGrid');
+    if (!grid) return;
+    try {
+      const data = await api('/api/team');
+      if (!data.team || data.team.length === 0) {
+        grid.innerHTML = '<p class="resources-status">Team info coming soon.</p>';
+        return;
+      }
+      grid.innerHTML = data.team.map(renderTeamCard).join('');
+    } catch (err) {
+      grid.innerHTML = '<p class="resources-status">We couldn\'t load the team right now. Please check back soon.</p>';
+    }
+  }
+
+  // ── Site settings (currently just the WhatsApp number the chat widget uses) ──
+  let siteSettings = { whatsappNumber: '', googleClientId: '' };
+  async function loadSettings() {
+    try {
+      const data = await api('/api/settings');
+      siteSettings = data.settings || siteSettings;
+      initGoogleSignIn();
+    } catch (err) {
+      // non-fatal — chat just won't have a WhatsApp fallback number yet
+    }
+  }
+
+  // ── Google Sign-In ────────────────────────────────────────────────
+  // Only shows the button at all if an admin has configured a Google
+  // OAuth Client ID in Settings. The GSI script tag loads async, so this
+  // retries briefly in case our own code runs before Google's script has
+  // finished loading — if it's genuinely unavailable (blocked, offline),
+  // it just gives up quietly rather than showing a broken button.
+  //
+  // Renders Google's own button rather than hand-building one that calls
+  // prompt() — prompt()-only ("One Tap") is explicitly a best-effort/
+  // secondary flow in Google's own docs and can silently not appear at all
+  // (blocked third-party cookies, no active Google session, prior dismissal,
+  // etc.), so a custom button with no fallback wasn't reliably clickable.
+  // renderButton() is the officially reliable, click-driven mechanism —
+  // this uses its built-in circular icon-only style to match the site.
+  function initGoogleSignIn(attempt) {
+    attempt = attempt || 0;
+    if (!siteSettings.googleClientId) return;
+    if (typeof google === 'undefined' || !google.accounts) {
+      if (attempt < 20) setTimeout(() => initGoogleSignIn(attempt + 1), 200);
+      return;
+    }
+    google.accounts.id.initialize({
+      client_id: siteSettings.googleClientId,
+      callback: handleGoogleCredentialResponse,
+    });
+    const container = document.getElementById('googleButtonContainer');
+    if (container) {
+      google.accounts.id.renderButton(container, {
+        type: 'icon',
+        shape: 'circle',
+        theme: 'filled_black',
+        size: 'large',
+      });
+    }
+    const row = document.getElementById('googleSignInRow');
+    if (row) row.style.display = 'flex';
+  }
+
+  async function handleGoogleCredentialResponse(response) {
+    try {
+      const data = await api('/api/auth/google', { method: 'POST', body: JSON.stringify({ credential: response.credential }) });
+      setSession(data.token, data.user);
+      showToast(`Welcome, ${data.user.name.split(' ')[0]}!`, 'success');
+      closeAuthModal();
+      refreshAuthUI();
+    } catch (err) {
+      showAuthMsg(err.message, 'error');
+    }
+  }
+
+  // ── Live tracking: polls every second so the dashboard reflects updates
+  // made from the admin panel (or from WhatsApp, if that's connected) ──
+  let routeFullPath = null, routeProgressPath = null, routeLength = 0;
+
+  function initRoutePaths() {
+    routeFullPath = document.getElementById('routeFull');
+    routeProgressPath = document.getElementById('routeProgress');
+    if (routeFullPath) routeLength = routeFullPath.getTotalLength();
+  }
+
+  // Live map — created once, on the first real GPS fix, then just moved
+  // smoothly from there. Uses CARTO's free "Dark Matter" tiles (no API key
+  // needed) instead of the standard light OpenStreetMap style, so it
+  // actually fits a dark UI instead of being a bright rectangle dropped
+  // into it.
+  let liveMap = null;
+  let liveMarker = null;
+  let lastRenderedGeoKey = null;
+
+  function ensureLiveMap(lat, lng) {
+    if (liveMap) return;
+    if (typeof L === 'undefined') return; // Leaflet failed to load — fall back silently
+    liveMap = L.map('realMapEl', { zoomControl: true, attributionControl: true }).setView([lat, lng], 15);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 20,
+    }).addTo(liveMap);
+    const icon = L.divIcon({ className: 'live-marker', html: '', iconSize: [20, 20] });
+    liveMarker = L.marker([lat, lng], { icon }).addTo(liveMap);
+  }
+
+  function updateDashboardFromLocation(loc) {
+    if (!loc) return;
+    const pct = Math.max(0, Math.min(100, Math.round(loc.progressPercent ?? 0)));
+    const status = loc.statusText || 'In Transit';
+
+    const progressFill = document.getElementById('progress');
+    if (progressFill) progressFill.style.width = pct + '%';
+
+    const mapTitle = document.getElementById('mapTitleText');
+    if (mapTitle) mapTitle.textContent = `${status} — ${pct}% Complete`;
+
+    const progressLabel = document.getElementById('progressLabelText');
+    if (progressLabel) progressLabel.textContent = `${status} — ${pct}% Complete`;
+
+    const etaEl = document.getElementById('progressEtaText');
+    if (etaEl) etaEl.textContent = `ETA: ${loc.etaText || '—'}`;
+
+    // Whenever a real GPS position has been shared, show an actual map with a
+    // real pin instead of the stylized illustrated route — this is what
+    // makes "Share My Location" in the admin panel actually visible here.
+    const hasRealGps = loc.lat != null && loc.lng != null;
+    const illustrated = document.getElementById('illustratedRoute');
+    const realMap = document.getElementById('realMap');
+
+    if (hasRealGps) {
+      if (illustrated) illustrated.style.display = 'none';
+      if (realMap) realMap.style.display = 'block';
+
+      const geoKey = `${loc.lat.toFixed(5)},${loc.lng.toFixed(5)}`;
+      if (geoKey !== lastRenderedGeoKey) {
+        lastRenderedGeoKey = geoKey;
+        ensureLiveMap(loc.lat, loc.lng);
+        if (liveMap && liveMarker) {
+          liveMarker.setLatLng([loc.lat, loc.lng]);
+          liveMap.panTo([loc.lat, loc.lng], { animate: true, duration: 0.8 });
+        }
+      } else if (liveMap) {
+        // First time this panel becomes visible after being hidden, Leaflet
+        // needs a nudge to recalculate its size correctly.
+        liveMap.invalidateSize();
+      }
+    } else {
+      if (illustrated) illustrated.style.display = 'flex';
+      if (realMap) realMap.style.display = 'none';
+
+      if (routeFullPath && routeLength) {
+        const point = routeFullPath.getPointAtLength(routeLength * (pct / 100));
+        const marker = document.getElementById('truckMarker');
+        if (marker) marker.setAttribute('transform', `translate(${point.x}, ${point.y})`);
+
+        if (routeProgressPath) {
+          routeProgressPath.style.strokeDasharray = String(routeLength);
+          routeProgressPath.style.strokeDashoffset = String(routeLength * (1 - pct / 100));
+        }
+      }
+    }
+  }
+
+  async function pollLocation() {
+    try {
+      const data = await api('/api/location');
+      updateDashboardFromLocation(data.location);
+    } catch (err) {
+      // silent — dashboard just skips this tick and tries again in 1s
+    }
+  }
+
+  // ── Chat widget: sends visitor messages toward your WhatsApp number ──
+  function appendChatBubble(who, text, mine) {
+    const wrap = document.getElementById('chatMessages');
+    if (!wrap) return;
+    const div = document.createElement('div');
+    div.className = 'chat-msg';
+    div.innerHTML = `<div class="chat-avatar"${mine ? ' style="background:#333"' : ''}>${escapeHtml(who)}</div><div class="chat-bubble${mine ? ' mine' : ''}">${escapeHtml(text)}</div>`;
+    wrap.appendChild(div);
+    wrap.scrollTop = wrap.scrollHeight;
+  }
+
+  async function sendChatMessage() {
+    const input = document.getElementById('chatInput');
+    const btn = document.getElementById('chatSend');
+    if (!input) return;
+    const message = input.value.trim();
+    if (!message) return;
+
+    appendChatBubble('You', message, true);
+    input.value = '';
+    if (btn) btn.disabled = true;
+
+    try {
+      const website = document.getElementById('chatWebsite')?.value || ''; // honeypot
+      const data = await api('/api/chat-messages', { method: 'POST', body: JSON.stringify({ message, website }) });
+      if (data.sentViaApi) {
+        appendChatBubble('T', "Sent! We'll reply on WhatsApp shortly.", false);
+      } else if (data.whatsappNumber) {
+        appendChatBubble('T', 'Opening WhatsApp so you can send that straight to our team…', false);
+        window.open(`https://wa.me/${data.whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+      } else {
+        appendChatBubble('T', "Got it — we've noted your message and will follow up.", false);
+      }
+    } catch (err) {
+      appendChatBubble('T', "Sorry, that didn't send. Please try again in a moment.", false);
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  }
+
+  document.getElementById('chatSend')?.addEventListener('click', sendChatMessage);
+  document.getElementById('chatInput')?.addEventListener('keydown', e => { if (e.key === 'Enter') sendChatMessage(); });
+
+  // ── Analytics: a single, anonymous pageview ping (no cookies, no IP stored) ──
+  function trackPageview() {
+    try {
+      const payload = JSON.stringify({ path: window.location.pathname, referrer: document.referrer || '' });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('/api/analytics/pageview', new Blob([payload], { type: 'application/json' }));
+      } else {
+        fetch('/api/analytics/pageview', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true });
+      }
+    } catch { /* analytics should never break the page */ }
+  }
+
+  // ── Init ─────────────────────────────────────────────────────────
+  refreshAuthUI();
+  loadArticles();
+  loadTeam();
+  loadSettings();
+  tickHeroType();
+  initRoutePaths();
+  pollLocation();
+  setInterval(pollLocation, 1000);
+  trackPageview();
+</script>
+</body>
+</html>
